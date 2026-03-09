@@ -1,1 +1,174 @@
-tongchengxinxi
+## Menhu 同城门户复刻版
+
+基于公开可访问的 `https://menhu.kai168.cn/` H5 页面结构，整理并实现了一套 **ThinkCMF5 后端 + uni-app Vue2 前端** 的同城信息门户项目骨架，覆盖如下核心功能：
+
+- 首页聚合
+- 本地头条
+- 分类信息发布与浏览
+- 同城商家列表与详情
+- 发现 / 圈子动态
+- 用户中心
+- 登录
+- 意见反馈
+
+> 说明：由于原站后端接口与数据库不可直接完整获取，本仓库实现的是一套**可继续二次开发的完整功能型骨架**。前端默认使用 mock 数据，可直接预览页面与交互；切换到真实接口时，只需关闭 mock 开关并对接 `backend` 中的 API。
+
+---
+
+## 目录结构
+
+```text
+/backend
+  /api/portal
+    /controller    ThinkCMF5 API 控制器
+    /service       门户演示数据服务
+  /data/install    SQL 结构文件
+  /public          ThinkCMF5 入口
+  composer.json
+
+/frontend
+  /api             前端接口封装
+  /common          配置与 mock 数据
+  /pages           uni-app 页面
+  App.vue
+  main.js
+  manifest.json
+  pages.json
+```
+
+---
+
+## 已实现的业务模块
+
+### 1. 首页
+
+- 门户标题与 banner
+- 默认城市
+- 频道导航
+- 最新发布
+- 本地头条
+- 优选商家
+- 发现动态预览
+
+### 2. 分类信息
+
+已内置以下频道配置与动态发布表单：
+
+- 招聘求职
+- 找人才
+- 房屋出租
+- 房屋出售
+- 二手车
+- 物品交易
+- 农林牧渔
+- 生意转让
+- 需求打听
+- 拼车出行
+- 本地推广
+
+### 3. 商家
+
+- 商家列表
+- 详情页
+- 评论展示
+- 入驻申请接口骨架
+
+### 4. 发现 / 圈子
+
+- 帖子流
+- 发帖
+- 帖子详情
+- 评论展示
+
+### 5. 用户中心
+
+- 演示账号登录
+- 会员信息
+- 我的数据统计
+- 最近发布
+- 反馈提交
+
+---
+
+## 后端说明
+
+后端位于 `backend/`，按 ThinkCMF5 风格组织：
+
+- `backend/api/portal/route.php`：API 路由
+- `backend/api/portal/controller/*.php`：控制器
+- `backend/api/portal/service/PortalDemoService.php`：演示数据与聚合逻辑
+- `backend/data/install/portal_demo.sql`：数据库表结构建议
+
+### 当前 API 设计
+
+- `GET /portal/bootstrap`
+- `GET /portal/cities`
+- `GET /portal/channels`
+- `GET /portal/content`
+- `GET /portal/content/:id`
+- `POST /portal/content`
+- `GET /portal/news`
+- `GET /portal/news/:id`
+- `GET /portal/merchants`
+- `GET /portal/merchants/:id`
+- `GET /portal/discovery`
+- `GET /portal/discovery/:id`
+- `POST /portal/discovery`
+- `POST /portal/auth/login`
+- `GET /portal/user/dashboard`
+- `POST /portal/user/feedback`
+
+同时兼容补了几个从原 H5 bundle 中观察到的接口别名：
+
+- `sybmenhu.common/get_city_by_lat`
+- `sybmenhu.common/area_tree`
+- `sybmenhu.common/params`
+- `sybmenhu.user/my_auth`
+- `sybmenhu.user/wxlogin`
+
+---
+
+## 前端说明
+
+前端位于 `frontend/`，使用 uni-app Vue2 写法。
+
+### 关键文件
+
+- `frontend/common/config.js`：接口地址与 mock 开关
+- `frontend/common/mock-data.js`：页面所需演示数据
+- `frontend/api/index.js`：统一 API 调用
+- `frontend/pages/*`：业务页面
+
+### mock / 真实接口切换
+
+默认在 `frontend/common/config.js` 中：
+
+```js
+export const USE_MOCK = true;
+```
+
+切换到真实 ThinkCMF5 后端时：
+
+1. 将 `USE_MOCK` 改为 `false`
+2. 把 `API_BASE_URL` 改为你的后端地址
+3. 根据你的最终接口响应格式，微调 `frontend/api/index.js`
+
+---
+
+## 演示账号
+
+- 手机号：`18888888881`
+- 密码：`18888888881`
+
+---
+
+## 后续建议
+
+如果你要把这个项目继续做到上线级别，建议下一步继续补：
+
+1. ThinkCMF 后台管理菜单与数据模型
+2. 真正的 MySQL 持久化
+3. 图片上传、OSS 配置、支付
+4. 收藏、评论、聊天、审核流
+5. 微信小程序与 APP 打包配置
+6. 频道字段后台化配置

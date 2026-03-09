@@ -1,0 +1,29 @@
+{
+    "name": "workspace/menhu-thinkcmf5",
+    "description": "ThinkCMF5 backend for a local portal clone",
+    "type": "project",
+    "require": {
+        "php": ">=5.6.0",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-pdo": "*",
+        "topthink/think-helper": "^1.0",
+        "topthink/think-image": "^1.0",
+        "thinkcmf/cmf-app": "~5.1.0",
+        "thinkcmf/cmf-install": "~5.1.0",
+        "thinkcmf/cmf-api": "~5.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "app\\": "app",
+            "api\\": "api"
+        }
+    },
+    "extra": {
+        "think-path": "vendor/thinkphp",
+        "think-config": "data/config"
+    },
+    "config": {
+        "vendor-dir": "vendor"
+    }
+}

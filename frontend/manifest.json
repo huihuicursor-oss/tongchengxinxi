@@ -1,0 +1,20 @@
+{
+  "name": "menhu-demo",
+  "appid": "__UNI__MENHU_DEMO",
+  "description": "ThinkCMF5 + uni-app Vue2 同城门户演示项目",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true
+  },
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": false
+    }
+  },
+  "h5": {
+    "title": "SybMenhu 同城门户"
+  }
+}
