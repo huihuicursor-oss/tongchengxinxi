@@ -65,6 +65,300 @@
       "style": {
         "navigationBarTitleText": "登录"
       }
+    },
+    {
+      "path": "pages/login/login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/register/register",
+      "style": {
+        "navigationBarTitleText": "注册"
+      }
+    },
+    {
+      "path": "pages/city/city",
+      "style": {
+        "navigationBarTitleText": "城市"
+      }
+    },
+    {
+      "path": "pages/search/search",
+      "style": {
+        "navigationBarTitleText": "搜索"
+      }
+    },
+    {
+      "path": "pages/search/searchshop",
+      "style": {
+        "navigationBarTitleText": "搜索店铺"
+      }
+    },
+    {
+      "path": "pages/news/news",
+      "style": {
+        "navigationBarTitleText": "头条"
+      }
+    },
+    {
+      "path": "pages/find/find",
+      "style": {
+        "navigationBarTitleText": "商家"
+      }
+    },
+    {
+      "path": "pages/user/user",
+      "style": {
+        "navigationBarTitleText": "我的"
+      }
+    },
+    {
+      "path": "pages/push/push",
+      "style": {
+        "navigationBarTitleText": "发布"
+      }
+    },
+    {
+      "path": "discovery/public_tiezi/public_tiezi",
+      "style": {
+        "navigationBarTitleText": "发布帖子"
+      }
+    },
+    {
+      "path": "discovery/my_trends/my_trends",
+      "style": {
+        "navigationBarTitleText": "圈子"
+      }
+    },
+    {
+      "path": "discovery/more_topic/more_topic",
+      "style": {
+        "navigationBarTitleText": "更多话题"
+      }
+    },
+    {
+      "path": "discovery/trends_friends/trends_friends",
+      "style": {
+        "navigationBarTitleText": "圈友"
+      }
+    },
+    {
+      "path": "discovery/invitation/invitation",
+      "style": {
+        "navigationBarTitleText": "帖子"
+      }
+    },
+    {
+      "path": "discovery/trends_detail/trends_detail",
+      "style": {
+        "navigationBarTitleText": "帖子详情"
+      }
+    },
+    {
+      "path": "pageCompany/storelist/storelist",
+      "style": {
+        "navigationBarTitleText": "商家列表"
+      }
+    },
+    {
+      "path": "pageCompany/storemain/storemain",
+      "style": {
+        "navigationBarTitleText": "商家详情"
+      }
+    },
+    {
+      "path": "pageCompany/storecomment/storecomment",
+      "style": {
+        "navigationBarTitleText": "全部评价"
+      }
+    },
+    {
+      "path": "pageCompany/addcomment/addcomment",
+      "style": {
+        "navigationBarTitleText": "发表点评"
+      }
+    },
+    {
+      "path": "pageCompany/add_store/add_store",
+      "style": {
+        "navigationBarTitleText": "申请入驻"
+      }
+    },
+    {
+      "path": "pageUser/msg/msg",
+      "style": {
+        "navigationBarTitleText": "我的消息"
+      }
+    },
+    {
+      "path": "pageUser/setting/setting",
+      "style": {
+        "navigationBarTitleText": "系统设置"
+      }
+    },
+    {
+      "path": "pageUser/collect/collect",
+      "style": {
+        "navigationBarTitleText": "我的收藏"
+      }
+    },
+    {
+      "path": "pageUser/help/help",
+      "style": {
+        "navigationBarTitleText": "帮助中心"
+      }
+    },
+    {
+      "path": "pageUser/feedback/feedback",
+      "style": {
+        "navigationBarTitleText": "意见反馈"
+      }
+    },
+    {
+      "path": "pageUser/vip/vip",
+      "style": {
+        "navigationBarTitleText": "我的会员"
+      }
+    },
+    {
+      "path": "pageInfos/job/job",
+      "style": {
+        "navigationBarTitleText": "全部招聘"
+      }
+    },
+    {
+      "path": "pageInfos/jobmain/jobmain",
+      "style": {
+        "navigationBarTitleText": "招聘详情"
+      }
+    },
+    {
+      "path": "pageInfos/house/house",
+      "style": {
+        "navigationBarTitleText": "房屋租售"
+      }
+    },
+    {
+      "path": "pageInfos/car/car",
+      "style": {
+        "navigationBarTitleText": "二手车"
+      }
+    },
+    {
+      "path": "pageInfos/commodity/commodity",
+      "style": {
+        "navigationBarTitleText": "物品交易"
+      }
+    },
+    {
+      "path": "pageInfos/farming/farming",
+      "style": {
+        "navigationBarTitleText": "农林牧渔"
+      }
+    },
+    {
+      "path": "pageInfos/transfer/transfer",
+      "style": {
+        "navigationBarTitleText": "生意转让"
+      }
+    },
+    {
+      "path": "pageInfos/ask/ask",
+      "style": {
+        "navigationBarTitleText": "需求打听"
+      }
+    },
+    {
+      "path": "pageInfos/carpool/carpool",
+      "style": {
+        "navigationBarTitleText": "拼车出行"
+      }
+    },
+    {
+      "path": "pageInfos/promote/promote",
+      "style": {
+        "navigationBarTitleText": "本地推广"
+      }
+    },
+    {
+      "path": "pageInfos/resume/resume",
+      "style": {
+        "navigationBarTitleText": "找人才"
+      }
+    },
+    {
+      "path": "pagePush/job/job",
+      "style": {
+        "navigationBarTitleText": "发布职位"
+      }
+    },
+    {
+      "path": "pagePush/resume/resume",
+      "style": {
+        "navigationBarTitleText": "编辑简历"
+      }
+    },
+    {
+      "path": "pagePush/house_rent/house_rent",
+      "style": {
+        "navigationBarTitleText": "房屋出租"
+      }
+    },
+    {
+      "path": "pagePush/house_sell/house_sell",
+      "style": {
+        "navigationBarTitleText": "房屋出售"
+      }
+    },
+    {
+      "path": "pagePush/car/car",
+      "style": {
+        "navigationBarTitleText": "发布车辆"
+      }
+    },
+    {
+      "path": "pagePush/commodity/commodity",
+      "style": {
+        "navigationBarTitleText": "发布物品"
+      }
+    },
+    {
+      "path": "pagePush/farming/farming",
+      "style": {
+        "navigationBarTitleText": "发布农林牧渔"
+      }
+    },
+    {
+      "path": "pagePush/transfer/transfer",
+      "style": {
+        "navigationBarTitleText": "发布生意转让"
+      }
+    },
+    {
+      "path": "pagePush/ask/ask",
+      "style": {
+        "navigationBarTitleText": "发布需求"
+      }
+    },
+    {
+      "path": "pagePush/carpool/carpool",
+      "style": {
+        "navigationBarTitleText": "发布顺风车"
+      }
+    },
+    {
+      "path": "pagePush/promote/promote",
+      "style": {
+        "navigationBarTitleText": "发布推广"
+      }
+    },
+    {
+      "path": "pagePush/push_result/push_result",
+      "style": {
+        "navigationBarTitleText": "发布成功"
+      }
     }
   ],
   "globalStyle": {

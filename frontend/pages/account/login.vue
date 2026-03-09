@@ -9,6 +9,8 @@
       <input v-model="form.password" class="input" password placeholder="请输入密码" />
       <view style="height: 24rpx"></view>
       <view class="primary-btn" @click="submit">登录</view>
+      <view style="height: 20rpx"></view>
+      <view class="primary-btn secondary-btn" @click="goRegister">没有账号？去注册</view>
     </view>
   </view>
 </template>
@@ -40,7 +42,16 @@ export default {
           uni.reLaunch({ url: '/pages/tab/user' });
         }, 800);
       });
+    },
+    goRegister() {
+      uni.navigateTo({ url: '/pages/register/register' });
     }
   }
 };
 </script>
+
+<style>
+.secondary-btn {
+  background: #222;
+}
+</style>

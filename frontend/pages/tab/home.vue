@@ -4,6 +4,11 @@
     <view class="card hero-card">
       <view class="hero-title">{{ currentBanner.title }}</view>
       <view class="muted">{{ currentBanner.desc }}</view>
+      <view class="quick-row">
+        <view class="quick-chip" @click="go('/pages/city/city')">切换城市</view>
+        <view class="quick-chip" @click="go('/pages/search/search')">搜索信息</view>
+        <view class="quick-chip" @click="go('/pages/search/searchshop')">搜索店铺</view>
+      </view>
       <image class="hero-image" :src="currentBanner.image" mode="aspectFill"></image>
     </view>
 
@@ -142,6 +147,9 @@ export default {
     },
     openMerchant(id) {
       uni.navigateTo({ url: `/pages/merchant/detail?id=${id}` });
+    },
+    go(path) {
+      uni.navigateTo({ url: path });
     }
   }
 };
@@ -155,6 +163,20 @@ export default {
 .hero-title {
   font-size: 36rpx;
   font-weight: 700;
+}
+
+.quick-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 18rpx;
+}
+
+.quick-chip {
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  background: #f4f6f8;
+  font-size: 24rpx;
 }
 
 .hero-image {

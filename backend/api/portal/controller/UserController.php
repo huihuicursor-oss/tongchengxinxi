@@ -28,6 +28,21 @@ class UserController extends RestBaseController
         $this->success('获取收藏成功', $this->service->collections());
     }
 
+    public function messages()
+    {
+        $this->success('获取消息成功', $this->service->messages());
+    }
+
+    public function help()
+    {
+        $this->success('获取帮助中心成功', $this->service->helpArticles());
+    }
+
+    public function vip()
+    {
+        $this->success('获取会员信息成功', $this->service->vipInfo());
+    }
+
     public function collect()
     {
         $this->success('收藏状态已更新', $this->service->toggleCollection($this->request->post()));

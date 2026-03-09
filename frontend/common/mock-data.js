@@ -175,6 +175,48 @@ const user = {
   vip_name: '年度会员'
 };
 
+const cities = [
+  {
+    id: 100,
+    name: '全国',
+    children: [
+      { id: 104, name: '上海市', children: [{ id: 10401, name: '浦东新区' }, { id: 10402, name: '徐汇区' }, { id: 10403, name: '闵行区' }] },
+      { id: 105, name: '杭州市', children: [{ id: 10501, name: '西湖区' }, { id: 10502, name: '余杭区' }] },
+      { id: 106, name: '苏州市', children: [{ id: 10601, name: '工业园区' }, { id: 10602, name: '吴中区' }] }
+    ]
+  }
+];
+
+const messages = [
+  { id: 'msg-1', title: '系统通知', summary: '你的商家入驻申请已提交，正在审核中。', created_at: '2026-03-09 09:20:00' },
+  { id: 'msg-2', title: '互动提醒', summary: '有人评论了你发布的同城帖子。', created_at: '2026-03-08 15:10:00' },
+  { id: 'msg-3', title: '活动提醒', summary: '你收藏的商家上新了限时优惠券。', created_at: '2026-03-07 18:40:00' }
+];
+
+const helpArticles = [
+  { id: 'help-1', title: '如何发布信息', content: '进入发布页面后选择频道，按类目填写必填字段即可提交。' },
+  { id: 'help-2', title: '如何提升信息曝光', content: '建议填写完整标题、价格、图片和联系方式，并保持内容真实。' },
+  { id: 'help-3', title: '商家如何入驻', content: '在商家页面进入申请入驻，提交店铺资料与联系方式后等待审核。' }
+];
+
+const topicList = [
+  { id: 'topic-1', name: '同城活动', posts: 32 },
+  { id: 'topic-2', name: '吃喝玩乐', posts: 54 },
+  { id: 'topic-3', name: '生活互助', posts: 27 }
+];
+
+const friends = [
+  { id: 'u-1', nickname: '阿木', city: '上海市', tags: ['徒步', '露营'] },
+  { id: 'u-2', nickname: '糖糖', city: '上海市', tags: ['搬家', '租房'] },
+  { id: 'u-3', nickname: 'Momo', city: '上海市', tags: ['咖啡', '宠物'] }
+];
+
+const vipInfo = {
+  current_plan: '年度会员',
+  expire_at: '2027-03-09',
+  rights: ['发布信息优先展示', '商家中心高级样式', '专属会员标识', '收藏和消息上限提升']
+};
+
 export function getChannels() {
   return channels;
 }
@@ -195,9 +237,16 @@ export function getBootstrap() {
   };
 }
 
+export function getCities() {
+  return cities;
+}
+
 export function getContentList(params = {}) {
   return contents.filter(item => {
     if (params.channel && item.channel !== params.channel) {
+      return false;
+    }
+    if (params.channels && Array.isArray(params.channels) && params.channels.length && !params.channels.includes(item.channel)) {
       return false;
     }
     if (params.keyword) {
@@ -246,12 +295,48 @@ export function getMerchantDetail(id) {
   return merchants.find(item => item.id === id) || null;
 }
 
+export function getMerchantComments(id) {
+  const detail = getMerchantDetail(id);
+  return detail ? detail.comments || [] : [];
+}
+
+export function addMerchantComment(payload) {
+  const detail = merchants.find(item => item.id === payload.merchant_id);
+  const comment = {
+    user: payload.user || user.nickname,
+    score: Number(payload.score || 5),
+    content: payload.content || '好评'
+  };
+  if (detail) {
+    detail.comments = detail.comments || [];
+    detail.comments.unshift(comment);
+  }
+  return comment;
+}
+
+export function applyMerchant(payload) {
+  return {
+    application_no: `MER${Date.now()}`,
+    store_name: payload.store_name || '新店铺',
+    contact_mobile: payload.mobile || user.mobile,
+    status: 'pending'
+  };
+}
+
 export function getDiscoveryFeed() {
   return discovery;
 }
 
 export function getDiscoveryDetail(id) {
   return discovery.find(item => item.id === id) || null;
+}
+
+export function getTopics() {
+  return topicList;
+}
+
+export function getTrendsFriends() {
+  return friends;
 }
 
 export function getUserDashboard() {
@@ -286,21 +371,54 @@ export function login(payload) {
   };
 }
 
-export function publishContent(payload) {
+export function register(payload) {
   return {
-    id: `draft-${Date.now()}`,
-    channel: payload.channel,
-    title: payload.title || '新发布信息',
-    status: 'published'
+    ok: true,
+    message: '注册成功',
+    data: {
+      token: `token-${Date.now()}`,
+      userinfo: {
+        ...user,
+        mobile: payload.mobile || '18800000000',
+        nickname: payload.nickname || '新用户'
+      }
+    }
   };
 }
 
+export function publishContent(payload) {
+  const channel = channels[payload.channel] || { label: '信息' };
+  const item = {
+    id: `draft-${Date.now()}`,
+    channel: payload.channel,
+    channel_name: channel.label,
+    title: payload.title || '新发布信息',
+    summary: payload.content || '这是新发布的演示信息。',
+    price: payload.price || payload.salary || payload.budget || '面议',
+    city: user.city,
+    address: payload.address || '待完善',
+    author: user.nickname,
+    tag: '新发布',
+    created_at: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    status: 'published'
+  };
+  contents.unshift(item);
+  return item;
+}
+
 export function publishDiscovery(payload) {
-  return {
+  const item = {
     id: `topic-${Date.now()}`,
     title: payload.title || '新帖子',
-    content: payload.content || ''
+    content: payload.content || '',
+    topic: payload.topic || '同城互动',
+    author: user.nickname,
+    likes: 0,
+    comments_count: 0,
+    created_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
   };
+  discovery.unshift(item);
+  return item;
 }
 
 export function submitFeedback(payload) {
@@ -308,4 +426,28 @@ export function submitFeedback(payload) {
     ticket_no: `FDB${Date.now()}`,
     content: payload.content || ''
   };
+}
+
+export function getCollections() {
+  return contents.slice(0, 4);
+}
+
+export function getMessages() {
+  return messages;
+}
+
+export function getHelpArticles() {
+  return helpArticles;
+}
+
+export function getVipInfo() {
+  return vipInfo;
+}
+
+export function searchContent(keyword) {
+  return getContentList({ keyword });
+}
+
+export function searchMerchants(keyword) {
+  return getMerchantList(keyword);
 }

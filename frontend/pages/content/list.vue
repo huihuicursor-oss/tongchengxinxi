@@ -33,6 +33,7 @@ export default {
   data() {
     return {
       channel: '',
+      channels: [],
       pageTitle: '信息列表',
       keyword: '',
       list: []
@@ -40,6 +41,7 @@ export default {
   },
   onLoad(options) {
     this.channel = options.channel || '';
+    this.channels = options.channels ? options.channels.split(',') : [];
     this.pageTitle = options.title || '信息列表';
     this.loadData();
   },
@@ -47,6 +49,7 @@ export default {
     loadData() {
       fetchContentList({
         channel: this.channel,
+        channels: this.channels,
         keyword: this.keyword
       }).then(data => {
         this.list = Array.isArray(data) ? data : data.list;

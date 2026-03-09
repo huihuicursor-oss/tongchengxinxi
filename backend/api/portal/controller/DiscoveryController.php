@@ -23,6 +23,16 @@ class DiscoveryController extends RestBaseController
         $this->success('获取发现列表成功', $this->service->discoveryFeed($this->request->param()));
     }
 
+    public function topics()
+    {
+        $this->success('获取发现话题成功', $this->service->topics());
+    }
+
+    public function friends()
+    {
+        $this->success('获取圈友列表成功', $this->service->friends());
+    }
+
     public function read($id)
     {
         $detail = $this->service->discoveryDetail($id);

@@ -423,6 +423,12 @@ class PortalDemoService
         ];
     }
 
+    public function merchantComments($id)
+    {
+        $detail = $this->merchantDetail($id);
+        return $detail && isset($detail['comments']) ? $detail['comments'] : [];
+    }
+
     public function discoveryFeed($params)
     {
         $keyword = isset($params['keyword']) ? trim($params['keyword']) : '';
@@ -462,6 +468,24 @@ class PortalDemoService
         ];
     }
 
+    public function topics()
+    {
+        return [
+            ['id' => 'topic-1', 'name' => '同城活动', 'posts' => 32],
+            ['id' => 'topic-2', 'name' => '吃喝玩乐', 'posts' => 54],
+            ['id' => 'topic-3', 'name' => '生活互助', 'posts' => 27],
+        ];
+    }
+
+    public function friends()
+    {
+        return [
+            ['id' => 'u-1', 'nickname' => '阿木', 'city' => '上海市', 'tags' => ['徒步', '露营']],
+            ['id' => 'u-2', 'nickname' => '糖糖', 'city' => '上海市', 'tags' => ['搬家', '租房']],
+            ['id' => 'u-3', 'nickname' => 'Momo', 'city' => '上海市', 'tags' => ['咖啡', '宠物']],
+        ];
+    }
+
     public function dashboard()
     {
         return [
@@ -485,6 +509,33 @@ class PortalDemoService
     public function collections()
     {
         return array_slice($this->sampleContents(), 0, 3);
+    }
+
+    public function messages()
+    {
+        return [
+            ['id' => 'msg-1', 'title' => '系统通知', 'summary' => '你的商家入驻申请已提交，正在审核中。', 'created_at' => '2026-03-09 09:20:00'],
+            ['id' => 'msg-2', 'title' => '互动提醒', 'summary' => '有人评论了你发布的同城帖子。', 'created_at' => '2026-03-08 15:10:00'],
+            ['id' => 'msg-3', 'title' => '活动提醒', 'summary' => '你收藏的商家上新了限时优惠券。', 'created_at' => '2026-03-07 18:40:00'],
+        ];
+    }
+
+    public function helpArticles()
+    {
+        return [
+            ['id' => 'help-1', 'title' => '如何发布信息', 'content' => '进入发布页面后选择频道，按类目填写必填字段即可提交。'],
+            ['id' => 'help-2', 'title' => '如何提升信息曝光', 'content' => '建议填写完整标题、价格、图片和联系方式，并保持内容真实。'],
+            ['id' => 'help-3', 'title' => '商家如何入驻', 'content' => '在商家页面进入申请入驻，提交店铺资料与联系方式后等待审核。'],
+        ];
+    }
+
+    public function vipInfo()
+    {
+        return [
+            'current_plan' => '年度会员',
+            'expire_at'    => '2027-03-09',
+            'rights'       => ['发布信息优先展示', '商家中心高级样式', '专属会员标识', '收藏和消息上限提升'],
+        ];
     }
 
     public function toggleCollection($params)

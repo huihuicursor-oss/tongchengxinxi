@@ -7,6 +7,11 @@
       <view class="muted">{{ detail.summary }}</view>
       <view class="muted" style="margin-top: 12rpx">地址：{{ detail.address }}</view>
       <view class="muted">电话：{{ detail.phone }}</view>
+      <view class="action-row">
+        <view class="action-btn" @click="go(`/pageCompany/storecomment/storecomment?id=${detail.id}`)">全部评价</view>
+        <view class="action-btn" @click="go(`/pageCompany/addcomment/addcomment?id=${detail.id}`)">发表点评</view>
+        <view class="action-btn" @click="go('/pageCompany/add_store/add_store')">申请入驻</view>
+      </view>
     </view>
 
     <view class="card" style="margin-top: 24rpx">
@@ -32,6 +37,11 @@ export default {
     fetchMerchantDetail(options.id).then(data => {
       this.detail = data || {};
     });
+  },
+  methods: {
+    go(path) {
+      uni.navigateTo({ url: path });
+    }
   }
 };
 </script>
@@ -58,5 +68,19 @@ export default {
 .comment-user {
   font-weight: 600;
   margin-bottom: 8rpx;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 20rpx;
+}
+
+.action-btn {
+  padding: 10rpx 18rpx;
+  background: #f4f6f8;
+  border-radius: 999rpx;
+  font-size: 24rpx;
 }
 </style>

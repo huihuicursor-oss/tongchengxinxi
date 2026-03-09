@@ -34,6 +34,11 @@ class MerchantController extends RestBaseController
         $this->success('获取商家详情成功', $detail);
     }
 
+    public function comments($id)
+    {
+        $this->success('获取商家评论成功', $this->service->merchantComments($id));
+    }
+
     public function comment()
     {
         $this->success('点评成功', $this->service->commentMerchant($this->request->post()));

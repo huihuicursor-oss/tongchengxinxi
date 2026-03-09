@@ -21,6 +21,16 @@
     </view>
 
     <view class="section-title">
+      <text>常用功能</text>
+    </view>
+    <view class="menu-grid">
+      <view v-for="item in menus" :key="item.path" class="card menu-card" @click="go(item.path)">
+        <view class="item-title">{{ item.name }}</view>
+        <view class="muted">{{ item.desc }}</view>
+      </view>
+    </view>
+
+    <view class="section-title">
       <text>最近发布</text>
     </view>
     <view
@@ -53,7 +63,15 @@ export default {
         user: {},
         stats: [],
         latest_publish: []
-      }
+      },
+      menus: [
+        { name: '我的消息', desc: '查看通知提醒', path: '/pageUser/msg/msg' },
+        { name: '我的收藏', desc: '收藏的信息', path: '/pageUser/collect/collect' },
+        { name: '系统设置', desc: '账号与功能设置', path: '/pageUser/setting/setting' },
+        { name: '帮助中心', desc: '常见问题说明', path: '/pageUser/help/help' },
+        { name: '意见反馈', desc: '提交建议问题', path: '/pageUser/feedback/feedback' },
+        { name: '我的会员', desc: '会员权益说明', path: '/pageUser/vip/vip' }
+      ]
     };
   },
   onLoad() {
@@ -67,6 +85,9 @@ export default {
     },
     goLogin() {
       uni.navigateTo({ url: '/pages/account/login' });
+    },
+    go(path) {
+      uni.navigateTo({ url: path });
     },
     submit() {
       createFeedback({ content: this.feedback }).then(result => {
@@ -112,8 +133,18 @@ export default {
   gap: 20rpx;
 }
 
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20rpx;
+}
+
 .stat-card {
   text-align: center;
+}
+
+.menu-card {
+  min-height: 140rpx;
 }
 
 .stat-value {
