@@ -1,0 +1,102 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="toolbar card-inline">
+    <div class="toolbar-actions">
+        <a class="button button-light" href="/elders">返回列表</a>
+        {if $elder.id}
+        <a class="button button-light" href="/elders/{$elder.id}">查看详情</a>
+        {/if}
+    </div>
+    <span class="badge badge-soft">管理员 / 运营可编辑</span>
+</div>
+
+<section class="card">
+    <div class="section-head">
+        <h2>{$submitLabel}</h2>
+        <span>当前表单已接入 MySQL elders 表</span>
+    </div>
+    <form method="post" action="{$formAction}" class="form-grid">
+        <label class="form-field">
+            <span>老人姓名</span>
+            <input type="text" name="name" value="{$elder.name}" required>
+        </label>
+        <label class="form-field">
+            <span>性别</span>
+            <select name="gender">
+                {volist name="genderOptions" id="item"}
+                <option value="{$item}" {if $elder.gender == $item}selected{/if}>{$item}</option>
+                {/volist}
+            </select>
+        </label>
+        <label class="form-field">
+            <span>年龄</span>
+            <input type="number" name="age" value="{$elder.age}" min="50" max="120" required>
+        </label>
+        <label class="form-field">
+            <span>联系电话</span>
+            <input type="text" name="phone" value="{$elder.phone}" required>
+        </label>
+        <label class="form-field">
+            <span>身份证号</span>
+            <input type="text" name="id_card" value="{$elder.id_card}">
+        </label>
+        <label class="form-field">
+            <span>服务模式</span>
+            <select name="service_mode">
+                {volist name="serviceModeOptions" id="item"}
+                <option value="{$item}" {if $elder.service_mode == $item}selected{/if}>{$item}</option>
+                {/volist}
+            </select>
+        </label>
+        <label class="form-field">
+            <span>居住位置</span>
+            <input type="text" name="room" value="{$elder.room}" required>
+        </label>
+        <label class="form-field">
+            <span>服务地址</span>
+            <input type="text" name="address" value="{$elder.address}" required>
+        </label>
+        <label class="form-field">
+            <span>联系人</span>
+            <input type="text" name="contact_name" value="{$elder.contact_name}" required>
+        </label>
+        <label class="form-field">
+            <span>联系人电话</span>
+            <input type="text" name="contact_phone" value="{$elder.contact_phone}" required>
+        </label>
+        <label class="form-field">
+            <span>标签</span>
+            <input type="text" name="tags" value="{$elder.tags}" placeholder="例如：高血压 / 空巢 / 助餐">
+        </label>
+        <label class="form-field">
+            <span>护理等级</span>
+            <select name="care_level">
+                {volist name="careLevelOptions" id="item"}
+                <option value="{$item}" {if $elder.care_level == $item}selected{/if}>{$item}</option>
+                {/volist}
+            </select>
+        </label>
+        <label class="form-field">
+            <span>健康分</span>
+            <input type="number" name="health_score" value="{$elder.health_score}" min="0" max="100" required>
+        </label>
+        <label class="form-field">
+            <span>档案状态</span>
+            <select name="status">
+                {volist name="statusOptions" id="item"}
+                <option value="{$item}" {if $elder.status == $item}selected{/if}>{$item}</option>
+                {/volist}
+            </select>
+        </label>
+        <label class="form-field span-2">
+            <span>护理备注</span>
+            <textarea name="remark" rows="5" placeholder="补充老人照护要点、饮食注意事项、家属沟通信息等">{$elder.remark}</textarea>
+        </label>
+        <div class="form-actions span-2">
+            <button type="submit" class="button button-primary">{$submitLabel}</button>
+            <a href="/elders" class="button button-light">取消</a>
+        </div>
+    </form>
+</section>
+{/block}

@@ -1,10 +1,33 @@
 {extend name="layout/base" /}
 
 {block name="content"}
+<div class="toolbar card-inline">
+    <form class="toolbar-search" method="get" action="/elders">
+        <input type="text" name="keyword" value="{$keyword}" placeholder="搜索老人姓名、房间、联系人或标签">
+        <button type="submit" class="button button-primary">查询</button>
+    </form>
+    <div class="toolbar-actions">
+        {if $canManageElders}
+        <a class="button button-primary" href="/elders/create">新增老人档案</a>
+        {else /}
+        <span class="badge badge-soft">当前账号为只读，无法新增或编辑</span>
+        {/if}
+    </div>
+</div>
+
+<div class="grid cols-4 summary-grid compact-grid">
+    {volist name="elderStats" id="card"}
+    <section class="card metric-card metric-card-small">
+        <div class="metric-label">{$card.label}</div>
+        <div class="metric-value">{$card.value}</div>
+    </section>
+    {/volist}
+</div>
+
 <section class="card">
     <div class="section-head">
         <h2>老人档案总览</h2>
-        <span>支持后续接入数据库与检索条件</span>
+        <span>已切换为 MySQL 数据源</span>
     </div>
     <div class="table-wrapper">
         <table>
@@ -12,12 +35,14 @@
             <tr>
                 <th>姓名</th>
                 <th>性别/年龄</th>
+                <th>服务模式</th>
                 <th>居住位置</th>
                 <th>家属联系方式</th>
                 <th>标签</th>
                 <th>状态</th>
                 <th>健康分</th>
                 <th>最近服务</th>
+                <th>操作</th>
             </tr>
             </thead>
             <tbody>
@@ -25,12 +50,21 @@
             <tr>
                 <td><strong>{$elder.name}</strong></td>
                 <td>{$elder.gender} / {$elder.age} 岁</td>
+                <td>{$elder.serviceMode}</td>
                 <td>{$elder.room}</td>
                 <td>{$elder.contact}</td>
                 <td>{$elder.tags}</td>
                 <td><span class="badge {$elder.statusClass}">{$elder.status}</span></td>
                 <td>{$elder.health}</td>
                 <td>{$elder.lastService}</td>
+                <td>
+                    <div class="table-actions">
+                        <a href="/elders/{$elder.id}">查看</a>
+                        {if $canManageElders}
+                        <a href="/elders/{$elder.id}/edit">编辑</a>
+                        {/if}
+                    </div>
+                </td>
             </tr>
             {/volist}
             </tbody>

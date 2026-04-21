@@ -4,7 +4,7 @@
 <section class="card">
     <div class="section-head">
         <h2>服务工单中心</h2>
-        <span>覆盖助餐、陪诊、护理、巡检等服务流程</span>
+        <span>数据来自 service_orders 表</span>
     </div>
     <div class="table-wrapper">
         <table>
@@ -23,7 +23,13 @@
             {volist name="orders" id="order"}
             <tr>
                 <td>{$order.code}</td>
-                <td><strong>{$order.name}</strong></td>
+                <td>
+                    {if $order.elderId}
+                    <a href="/elders/{$order.elderId}"><strong>{$order.name}</strong></a>
+                    {else /}
+                    <strong>{$order.name}</strong>
+                    {/if}
+                </td>
                 <td>{$order.type}</td>
                 <td>{$order.address}</td>
                 <td>{$order.appointTime}</td>

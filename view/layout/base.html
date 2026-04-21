@@ -13,7 +13,7 @@
             <div class="brand-mark">YL</div>
             <div>
                 <div class="brand-title">{$systemTitle}</div>
-                <div class="brand-subtitle">ThinkPHP Demo</div>
+                <div class="brand-subtitle">ThinkPHP + MySQL</div>
             </div>
         </div>
         <nav class="sidebar-nav">
@@ -22,19 +22,21 @@
             {/volist}
         </nav>
         <div class="sidebar-panel">
-            <div class="sidebar-panel-title">适老化设计</div>
-            <p>大字号、高对比度、浅层导航，适合作为原型落地后的前台管理端演示版本。</p>
+            <div class="sidebar-panel-title">后台权限</div>
+            <p>当前账号：{$currentUser.name|default='未登录'} / {$currentRoleLabel|default='未登录'}</p>
+            <p>运营与管理员可编辑老人档案，只读账号仅可查看列表和详情。</p>
         </div>
     </aside>
     <main class="content">
         <header class="topbar">
             <div>
                 <h1>{$pageTitle}</h1>
-                <p>养老机构、社区居家与护理服务的一体化运营视图</p>
+                <p>已接入 MySQL 数据库、登录会话与老人档案表单</p>
             </div>
             <div class="topbar-actions">
-                <span class="chip">实时演示数据</span>
-                <span class="chip chip-primary">日期 2026-04-21</span>
+                <span class="chip">数据库 MySQL</span>
+                <span class="chip chip-primary">{$currentUser.username|default='guest'}</span>
+                <a class="button button-light" href="/logout">退出登录</a>
             </div>
         </header>
         <section class="page-body">

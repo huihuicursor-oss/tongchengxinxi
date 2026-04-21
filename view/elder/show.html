@@ -1,0 +1,83 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="toolbar card-inline">
+    <div class="toolbar-actions">
+        <a class="button button-light" href="/elders">返回列表</a>
+        {if $canManageElders}
+        <a class="button button-primary" href="/elders/{$elder.id}/edit">编辑档案</a>
+        {/if}
+    </div>
+    <span class="badge {$elder.statusClass}">{$elder.status}</span>
+</div>
+
+<div class="grid cols-2">
+    <section class="card detail-card">
+        <div class="section-head">
+            <h2>{$elder.name}</h2>
+            <span>最近更新 {$elder.updatedAt}</span>
+        </div>
+        <div class="detail-grid">
+            <div><span>性别年龄</span><strong>{$elder.gender} / {$elder.age} 岁</strong></div>
+            <div><span>联系电话</span><strong>{$elder.phone}</strong></div>
+            <div><span>身份证号</span><strong>{$elder.idCard}</strong></div>
+            <div><span>服务模式</span><strong>{$elder.serviceMode}</strong></div>
+            <div><span>居住位置</span><strong>{$elder.room}</strong></div>
+            <div><span>服务地址</span><strong>{$elder.address}</strong></div>
+            <div><span>联系人</span><strong>{$elder.contactName}</strong></div>
+            <div><span>联系人电话</span><strong>{$elder.contactPhone}</strong></div>
+            <div><span>护理等级</span><strong>{$elder.careLevel}</strong></div>
+            <div><span>健康分</span><strong>{$elder.healthScore}</strong></div>
+            <div class="span-2"><span>标签</span><strong>{$elder.tags}</strong></div>
+        </div>
+    </section>
+
+    <section class="card info-panel">
+        <div class="section-head">
+            <h2>护理备注</h2>
+            <span>可用于接原型详情说明区</span>
+        </div>
+        <p class="detail-remark">{$elder.remark|default='暂无备注'}</p>
+    </section>
+</div>
+
+<div class="grid cols-2">
+    <section class="card">
+        <div class="section-head">
+            <h2>最近健康记录</h2>
+            <span>health_records</span>
+        </div>
+        <div class="stack-list">
+            {volist name="healthRecords" id="record"}
+            <article class="stack-item">
+                <div class="stack-head">
+                    <strong>{$record.recordedAt}</strong>
+                    <span class="badge {$record.riskClass}">{$record.risk}</span>
+                </div>
+                <p>血压 {$record.bloodPressure} / 血糖 {$record.bloodSugar} / 心率 {$record.heartRate} / 睡眠 {$record.sleep}</p>
+                <small>{$record.notes}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="section-head">
+            <h2>最近服务记录</h2>
+            <span>service_orders</span>
+        </div>
+        <div class="stack-list">
+            {volist name="serviceOrders" id="order"}
+            <article class="stack-item">
+                <div class="stack-head">
+                    <strong>{$order.type}</strong>
+                    <span class="badge {$order.statusClass}">{$order.status}</span>
+                </div>
+                <p>{$order.appointTime} / {$order.staff} / {$order.address}</p>
+                <small>{$order.code} · {$order.notes}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+</div>
+{/block}

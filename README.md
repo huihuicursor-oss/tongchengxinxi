@@ -1,24 +1,56 @@
 # 智慧养老服务管理平台
 
-基于 ThinkPHP 8 搭建的养老系统演示项目，按照“养老平台/养老院管理/社区居家养老”类原型的常见模块进行了页面还原与后台化落地。
+基于 ThinkPHP 8 和 MySQL 的养老系统演示项目，已实现后台登录/权限、老人档案详情、新增/编辑表单，以及仪表盘、工单、健康监测、排班、活动通知等页面。
 
-## 已实现页面
+## 已实现功能
 
+- 后台登录、退出登录
+- 角色权限：超级管理员 / 运营人员 / 只读账号
+- MySQL 数据库接入
+- 初始化命令 `php think demo:init`
 - 运营概览 Dashboard
-- 老人档案
+- 老人档案列表、详情、新增、编辑
 - 服务工单中心
 - 健康监测
 - 护理排班
 - 活动通知
 
-## 技术栈
+## 环境要求
 
-- ThinkPHP 8
-- PHP 8.2
-- 原生模板 + 静态 CSS
-- 演示数据服务层 `app/service/ElderlyCareData.php`
+- PHP 8.2+
+- Composer
+- MySQL / MariaDB
 
-## 启动方式
+## 数据库配置
+
+复制示例环境变量并按实际环境调整：
+
+```bash
+cp .example.env .env
+```
+
+本地演示可使用如下配置：
+
+```env
+APP_DEBUG = true
+DB_DRIVER = mysql
+DB_TYPE = mysql
+DB_HOST = 127.0.0.1
+DB_PORT = 3306
+DB_NAME = elderly_care
+DB_USER = elderly_app
+DB_PASS = ElderlyApp@2026
+DB_CHARSET = utf8mb4
+DEFAULT_LANG = zh-cn
+```
+
+## 初始化数据
+
+```bash
+php think demo:init
+```
+
+## 启动项目
 
 ```bash
 php think run
@@ -30,9 +62,15 @@ php think run
 http://127.0.0.1:8000
 ```
 
-## 后续可继续扩展
+## 演示账号
 
-1. 接入 MySQL，拆分老人档案、服务工单、排班、健康数据等表。
-2. 增加登录鉴权、角色权限、表单提交与 CRUD。
-3. 对接微信通知、短信通知、可穿戴设备告警等能力。
-4. 新增家属端、小程序端或大屏数据看板。
+- `admin / Admin@123456`（超级管理员）
+- `operator / Operator@123456`（运营人员）
+- `viewer / Viewer@123456`（只读账号）
+
+## 下一步可继续扩展
+
+1. 按原型截图继续逐页精修 UI 和交互。
+2. 增加服务工单、健康记录、活动通知的新增/编辑功能。
+3. 接入短信、微信通知、设备告警和家属端同步。
+4. 增加统计图表、大屏和移动端页面。

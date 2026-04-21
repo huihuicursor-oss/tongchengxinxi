@@ -15,14 +15,14 @@
     <section class="card">
         <div class="section-head">
             <h2>服务类型分布</h2>
-            <span>本周工单</span>
+            <span>来源于 service_orders 表</span>
         </div>
         <div class="progress-list">
             {volist name="serviceStats" id="item"}
             <div class="progress-item">
                 <div class="progress-meta">
                     <span>{$item.label}</span>
-                    <strong>{$item.value}</strong>
+                    <strong>{$item.count} 单</strong>
                 </div>
                 <div class="progress-track">
                     <div class="progress-bar" style="width: {$item.value}%;"></div>
@@ -35,7 +35,7 @@
     <section class="card">
         <div class="section-head">
             <h2>今日排程</h2>
-            <span>按时间顺序</span>
+            <span>按工单预约时间排序</span>
         </div>
         <div class="timeline">
             {volist name="schedule" id="item"}
@@ -43,7 +43,7 @@
                 <div class="timeline-time">{$item.time}</div>
                 <div>
                     <div class="timeline-title">{$item.task}</div>
-                    <div class="timeline-desc">负责人：{$item.owner}</div>
+                    <div class="timeline-desc">执行人：{$item.owner}</div>
                 </div>
             </div>
             {/volist}
@@ -55,7 +55,7 @@
     <section class="card">
         <div class="section-head">
             <h2>通知公告</h2>
-            <span>最新 3 条</span>
+            <span>来源于 notices 表</span>
         </div>
         <div class="stack-list">
             {volist name="notices" id="notice"}
@@ -74,7 +74,7 @@
     <section class="card">
         <div class="section-head">
             <h2>风险预警</h2>
-            <span>需要持续跟进</span>
+            <span>来自健康监测记录</span>
         </div>
         <div class="stack-list">
             {volist name="alerts" id="alert"}
