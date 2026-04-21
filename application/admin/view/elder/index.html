@@ -1,0 +1,39 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="card filter-card">
+    <form class="filter-form" method="get" action="{:url('admin/elder/index')}">
+        <input type="text" name="keyword" value="{$keyword}" placeholder="搜索姓名/房间/护理等级">
+        <button class="btn btn-primary" type="submit">搜索</button>
+    </form>
+</section>
+<section class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>房间</th>
+                <th>护理等级</th>
+                <th>紧急联系人</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="elders" id="item"}
+            <tr>
+                <td>{$item.name}</td>
+                <td>{$item.gender}</td>
+                <td>{$item.age}</td>
+                <td>{$item.room}</td>
+                <td>{$item.care_level}</td>
+                <td>{$item.contact_name} / {$item.contact_phone}</td>
+                <td><a class="btn btn-link" href="{$item.detail_url}">查看详情</a></td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

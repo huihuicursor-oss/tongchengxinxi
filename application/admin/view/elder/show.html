@@ -1,0 +1,80 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="card">
+    <div class="detail-header">
+        <div>
+            <h2>{$elder.name}</h2>
+            <p>{$elder.gender} / {$elder.age} 岁 / 房间 {$elder.room}</p>
+        </div>
+        <a class="btn btn-primary" href="{$backUrl}">返回列表</a>
+    </div>
+    <div class="two-col">
+        <div class="metric">
+            <h3>护理等级</h3>
+            <p>{$elder.care_level}</p>
+        </div>
+        <div class="metric">
+            <h3>入住状态</h3>
+            <p>{$elder.status}</p>
+        </div>
+        <div class="metric">
+            <h3>紧急联系人</h3>
+            <p>{$elder.contact_name} / {$elder.contact_phone}</p>
+        </div>
+        <div class="metric">
+            <h3>标签</h3>
+            <p>{$elder.tags}</p>
+        </div>
+    </div>
+    <div class="detail-text">
+        <p><strong>病史：</strong>{$elder.medical_history}</p>
+        <p><strong>入住日期：</strong>{$elder.admission_date}</p>
+        <p><strong>备注：</strong>{$elder.remark}</p>
+    </div>
+</section>
+<section class="content-grid">
+    <article class="card">
+        <h2 class="panel-title">健康记录</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>血压</th>
+                    <th>血氧</th>
+                    <th>心率</th>
+                    <th>风险</th>
+                    <th>备注</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="healthRecords" id="item"}
+                <tr>
+                    <td>{$item.measured_at}</td>
+                    <td>{$item.blood_pressure}</td>
+                    <td>{$item.blood_oxygen}</td>
+                    <td>{$item.heart_rate}</td>
+                    <td>{$item.risk_level}</td>
+                    <td>{$item.note}</td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </article>
+    <article class="card">
+        <h2 class="panel-title">告警与探访</h2>
+        <ul class="simple-list">
+            {volist name="alerts" id="item"}
+            <li>告警：{$item.title} / {$item.level} / {$item.status} / {$item.created_at}</li>
+            {/volist}
+        </ul>
+        <h2 class="panel-title section-spacer">探访记录</h2>
+        <ul class="simple-list">
+            {volist name="visits" id="item"}
+            <li>{$item.visitor_name}（{$item.relation}） / {$item.visit_time} / {$item.status}</li>
+            {/volist}
+        </ul>
+    </article>
+</section>
+{/block}

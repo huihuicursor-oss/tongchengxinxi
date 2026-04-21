@@ -1,0 +1,43 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="grid-cards">
+    {volist name="overview" id="item"}
+    <article class="card stat-card">
+        <p class="card-label">{$item.label}</p>
+        <div class="card-value">{$item.value}<small>{$item.unit}</small></div>
+    </article>
+    {/volist}
+</section>
+<section class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>老人</th>
+                <th>房间</th>
+                <th>血压</th>
+                <th>血氧</th>
+                <th>心率</th>
+                <th>风险</th>
+                <th>时间</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="records" id="item"}
+            <tr>
+                <td>{$item.name}</td>
+                <td>{$item.room}</td>
+                <td>{$item.blood_pressure}</td>
+                <td>{$item.blood_oxygen}</td>
+                <td>{$item.heart_rate}</td>
+                <td>{$item.risk_level}</td>
+                <td>{$item.measured_at}</td>
+                <td>{$item.note}</td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

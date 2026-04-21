@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{block name="title"}{$pageTitle} - {$appName}{/block}</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-logo">YL</div>
+            <div>
+                <strong>{$appName}</strong>
+                <p>ThinkPHP5.1 正式版</p>
+            </div>
+        </div>
+        <nav class="menu">
+            {volist name="menuItems" id="menu"}
+            <a class="menu-item {eq name='menu.active' value='1'}active{/eq}" href="{$menu.url}">
+                <span>{$menu.title}</span>
+            </a>
+            {/volist}
+        </nav>
+        <div class="sidebar-footer">
+            <p>当前账号：{$userInfo.real_name}</p>
+            <p>角色：{$userInfo.role_name}</p>
+            <p><a class="logout-link" href="{$logoutUrl}">退出登录</a></p>
+        </div>
+    </aside>
+    <main class="main-content">
+        <header class="topbar">
+            <div>
+                <h1>{$pageTitle}</h1>
+                <p>机构养老、健康预警、服务调度、探访审核一体化后台</p>
+            </div>
+            <div class="topbar-actions">
+                <span class="status-dot"></span>
+                <span>系统运行正常</span>
+            </div>
+        </header>
+        {block name="content"}{/block}
+    </main>
+</div>
+</body>
+</html>

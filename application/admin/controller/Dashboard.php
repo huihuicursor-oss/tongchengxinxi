@@ -2,18 +2,16 @@
 
 namespace app\admin\controller;
 
-class Dashboard extends BaseController
+use app\common\service\DashboardService;
+
+class Dashboard extends Base
 {
     public function index()
     {
-        $dashboard = $this->repo->getDashboard();
-
-        return $this->renderPage('dashboard', [
+        $this->assign([
             'pageTitle' => '系统总览',
-            'pageDescription' => '展示机构入住情况、健康告警、服务执行和通知公告。',
-            'summary' => $dashboard,
-            'alerts' => $dashboard['alerts'],
-            'notices' => $dashboard['notices'],
+            'summary'   => DashboardService::summary(),
         ]);
+        return $this->fetch();
     }
 }

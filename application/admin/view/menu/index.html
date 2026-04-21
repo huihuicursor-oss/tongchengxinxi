@@ -1,0 +1,73 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="content-grid two-columns-equal">
+    <article class="card">
+        <h2 class="panel-title">新增菜单</h2>
+        <form method="post" action="{$saveUrl}" class="stack-form">
+            <div class="form-group">
+                <label>父级菜单 ID</label>
+                <input type="number" name="parent_id" value="0">
+            </div>
+            <div class="form-group">
+                <label>菜单名称</label>
+                <input type="text" name="title" required>
+            </div>
+            <div class="form-group">
+                <label>路由</label>
+                <input type="text" name="route" placeholder="admin/dashboard/index" required>
+            </div>
+            <div class="form-group">
+                <label>权限标识</label>
+                <input type="text" name="permission" placeholder="dashboard/index" required>
+            </div>
+            <div class="form-group">
+                <label>排序</label>
+                <input type="number" name="sort" value="100">
+            </div>
+            <div class="form-group">
+                <label>状态</label>
+                <select name="status">
+                    <option value="1">启用</option>
+                    <option value="0">停用</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">保存菜单</button>
+        </form>
+    </article>
+    <article class="card">
+        <h2 class="panel-title">菜单列表</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>路由</th>
+                    <th>权限</th>
+                    <th>排序</th>
+                    <th>状态</th>
+                    <th>切换</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="menus" id="item"}
+                <tr>
+                    <td>{$item.id}</td>
+                    <td>{$item.title}</td>
+                    <td>{$item.route}</td>
+                    <td>{$item.permission}</td>
+                    <td>{$item.sort}</td>
+                    <td>{eq name='item.status' value='1'}启用{else/}停用{/eq}</td>
+                    <td>
+                        <form method="post" action="{$item.toggle_url}">
+                            <button class="btn btn-secondary" type="submit">切换状态</button>
+                        </form>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+{/block}

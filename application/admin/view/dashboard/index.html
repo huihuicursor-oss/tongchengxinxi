@@ -1,0 +1,56 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="grid-cards">
+    {volist name="summary.stats" id="item"}
+    <article class="card stat-card">
+        <p class="card-label">{$item.label}</p>
+        <div class="card-value">{$item.value}<small>{$item.unit}</small></div>
+    </article>
+    {/volist}
+</section>
+<section class="content-grid">
+    <article class="card">
+        <h2 class="panel-title">近期告警</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>老人</th>
+                    <th>房间</th>
+                    <th>告警</th>
+                    <th>等级</th>
+                    <th>状态</th>
+                    <th>时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="summary.alerts" id="item"}
+                <tr>
+                    <td>{$item.name}</td>
+                    <td>{$item.room}</td>
+                    <td>{$item.title}</td>
+                    <td><span class="tag {eq name='item.level' value='高'}tag-high{else/}tag-medium{/eq}">{$item.level}</span></td>
+                    <td>{$item.status}</td>
+                    <td>{$item.created_at}</td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </article>
+    <article class="card">
+        <h2 class="panel-title">待跟进探访</h2>
+        <ul class="simple-list">
+            {volist name="summary.visits" id="item"}
+            <li><strong>{$item.visitor_name}</strong> 探访 {$item.name}（{$item.relation}）- {$item.visit_time} / {$item.status}</li>
+            {/volist}
+        </ul>
+        <h2 class="panel-title section-spacer">今日服务</h2>
+        <ul class="simple-list">
+            {volist name="summary.services" id="item"}
+            <li><strong>{$item.service_name}</strong> / {$item.target_name} / {$item.owner_name} / {$item.status}</li>
+            {/volist}
+        </ul>
+    </article>
+</section>
+{/block}

@@ -1,0 +1,42 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="card filter-card">
+    <form class="filter-form" method="get" action="{:url('admin/service/index')}">
+        <select name="status">
+            <option value="">全部状态</option>
+            <option value="已完成" {eq name="status" value="已完成"}selected{/eq}>已完成</option>
+            <option value="执行中" {eq name="status" value="执行中"}selected{/eq}>执行中</option>
+            <option value="待执行" {eq name="status" value="待执行"}selected{/eq}>待执行</option>
+        </select>
+        <button class="btn btn-primary" type="submit">筛选</button>
+    </form>
+</section>
+<section class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>服务项目</th>
+                <th>服务对象</th>
+                <th>责任人</th>
+                <th>时间</th>
+                <th>状态</th>
+                <th>备注</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="services" id="item"}
+            <tr>
+                <td>{$item.service_name}</td>
+                <td>{$item.target_name}</td>
+                <td>{$item.owner_name}</td>
+                <td>{$item.service_time}</td>
+                <td>{$item.status}</td>
+                <td>{$item.remark}</td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

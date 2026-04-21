@@ -1,0 +1,65 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="content-grid two-columns-equal">
+    <article class="card">
+        <h2 class="panel-title">用户角色分配</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                <tr>
+                    <th>账号</th>
+                    <th>姓名</th>
+                    <th>当前角色</th>
+                    <th>最后登录</th>
+                    <th>调整角色</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="users" id="item"}
+                <tr>
+                    <td>{$item.username}</td>
+                    <td>{$item.real_name}</td>
+                    <td>{$item.role_name}</td>
+                    <td>{$item.last_login_at|default='-'}</td>
+                    <td>
+                        <form class="inline-form" method="post" action="{$assignRoleUrl}">
+                            <input type="hidden" name="user_id" value="{$item.id}">
+                            <select name="role_id">
+                                {volist name="roles" id="role"}
+                                <option value="{$role.id}" {eq name="item.role_id" value="$role.id"}selected{/eq}>{$role.name}</option>
+                                {/volist}
+                            </select>
+                            <button class="btn btn-primary" type="submit">保存</button>
+                        </form>
+                    </td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </article>
+    <article class="card">
+        <h2 class="panel-title">角色菜单权限</h2>
+        <form method="get" action="{:url('admin/permission/index')}" class="filter-form role-filter">
+            <select name="role_id">
+                {volist name="roles" id="role"}
+                <option value="{$role.id}" {eq name="selectedRoleId" value="$role.id"}selected{/eq}>{$role.name}</option>
+                {/volist}
+            </select>
+            <button class="btn btn-primary" type="submit">切换角色</button>
+        </form>
+        <form method="post" action="{$saveRoleMenuUrl}" class="permission-form">
+            <input type="hidden" name="role_id" value="{$selectedRoleId}">
+            <div class="checkbox-grid">
+                {volist name="menus" id="menu"}
+                <label class="checkbox-item">
+                    <input type="checkbox" name="menu_ids[]" value="{$menu.id}" {in name="menu.id" value="$selectedMenuIds"}checked{/in}>
+                    <span>{$menu.title}（{$menu.permission}）</span>
+                </label>
+                {/volist}
+            </div>
+            <button class="btn btn-primary" type="submit">保存权限</button>
+        </form>
+    </article>
+</section>
+{/block}

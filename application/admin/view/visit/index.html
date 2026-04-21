@@ -1,0 +1,53 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="card filter-card">
+    <form class="filter-form" method="get" action="{:url('admin/visit/index')}">
+        <select name="status">
+            <option value="">全部状态</option>
+            <option value="待审核" {eq name="status" value="待审核"}selected{/eq}>待审核</option>
+            <option value="已通过" {eq name="status" value="已通过"}selected{/eq}>已通过</option>
+            <option value="已驳回" {eq name="status" value="已驳回"}selected{/eq}>已驳回</option>
+        </select>
+        <button class="btn btn-primary" type="submit">筛选</button>
+    </form>
+</section>
+<section class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>来访人</th>
+                <th>关系</th>
+                <th>探访老人</th>
+                <th>预约时间</th>
+                <th>状态</th>
+                <th>备注</th>
+                <th>审核</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="visits" id="item"}
+            <tr>
+                <td>{$item.visitor_name}</td>
+                <td>{$item.relation}</td>
+                <td>{$item.name}</td>
+                <td>{$item.visit_time}</td>
+                <td>{$item.status}</td>
+                <td>{$item.review_note}</td>
+                <td>
+                    <form class="inline-form" method="post" action="{$item.review_url}">
+                        <select name="status">
+                            <option value="已通过">通过</option>
+                            <option value="已驳回">驳回</option>
+                        </select>
+                        <input type="text" name="review_note" placeholder="填写审核说明">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                    </form>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - {$appName}</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body class="login-body">
+<div class="login-wrapper">
+    <div class="login-card">
+        <div class="login-brand">
+            <div class="brand-logo">YL</div>
+            <div>
+                <h1>{$appName}</h1>
+                <p>ThinkPHP5.1 可运行版</p>
+            </div>
+        </div>
+        {notempty name="errorMessage"}
+        <div class="alert-box">{$errorMessage}</div>
+        {/notempty}
+        <form method="post" action="{:url('admin/auth/login')}">
+            <div class="form-group">
+                <label>账号</label>
+                <input type="text" name="username" value="admin" required>
+            </div>
+            <div class="form-group">
+                <label>密码</label>
+                <input type="password" name="password" value="Admin@123" required>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit">登录系统</button>
+        </form>
+        <div class="login-tips">
+            <p>默认账号：</p>
+            <ul>
+                <li>超级管理员：admin / Admin@123</li>
+                <li>护理主管：operator / Operator@123</li>
+                <li>前台接待：reception / Reception@123</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,21 +1,23 @@
 <?php
+
+if (!function_exists('tp_admin_url')) {
+    function tp_admin_url($path, array $params = [])
+    {
+        $query = '/index.php?s=/' . ltrim($path, '/');
+        if ($params) {
+            $query .= '/' . http_build_query($params, '', '/');
+        }
+        return $query;
+    }
+}
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
-// | Copyright (c) 2006-2018 http://thinkphp.cn All rights reserved.
+// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
 // +----------------------------------------------------------------------
 // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
 // +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
+// | Author: 流年 <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
-// [ 应用入口文件 ]
-namespace think;
-
-// 加载基础文件
-require __DIR__ . '/../thinkphp/base.php';
-
-// 支持事先使用静态方法设置Request对象和Config对象
-
-// 执行应用并响应
-Container::get('app')->run()->send();
+// 应用公共文件

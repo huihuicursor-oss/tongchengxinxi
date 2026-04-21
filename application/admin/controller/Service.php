@@ -2,15 +2,23 @@
 
 namespace app\admin\controller;
 
-class Service extends BaseController
+use think\Db;
+
+class Service extends Base
 {
     public function index()
     {
-        return $this->renderPage('service', [
+        $status = $this->request->get('status/s', '');
+        $query = Db::name('service_order')->order('service_time asc, id asc');
+        if ($status !== '') {
+            $query->where('status', $status);
+        }
+
+        $this->assign([
             'pageTitle' => '服务调度',
-            'pageDescription' => '护理排班、送餐服务、康复训练等任务统一调度。',
-            'serviceSummary' => $this->repo->getServiceSummary(),
-            'serviceSchedules' => $this->repo->getServiceSchedules(),
+            'status'    => $status,
+            'services'  => $query->select(),
         ]);
+        return $this->fetch();
     }
 }

@@ -1,0 +1,29 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>模块</th>
+                <th>动作</th>
+                <th>内容</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="logs" id="item"}
+            <tr>
+                <td>{$item.id}</td>
+                <td>{$item.module}</td>
+                <td>{$item.action}</td>
+                <td>{$item.content}</td>
+                <td>{$item.created_at}</td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

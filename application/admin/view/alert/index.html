@@ -1,0 +1,65 @@
+{extend name="public/base" /}
+{block name="content"}
+<section class="card filter-card">
+    <form class="filter-form" method="get" action="{:url('admin/alert/index')}">
+        <select name="status">
+            <option value="">全部状态</option>
+            <option value="待处理" {eq name="status" value="待处理"}selected{/eq}>待处理</option>
+            <option value="处理中" {eq name="status" value="处理中"}selected{/eq}>处理中</option>
+            <option value="已处理" {eq name="status" value="已处理"}selected{/eq}>已处理</option>
+            <option value="已忽略" {eq name="status" value="已忽略"}selected{/eq}>已忽略</option>
+        </select>
+        <select name="level">
+            <option value="">全部等级</option>
+            <option value="高" {eq name="level" value="高"}selected{/eq}>高</option>
+            <option value="中" {eq name="level" value="中"}selected{/eq}>中</option>
+            <option value="低" {eq name="level" value="低"}selected{/eq}>低</option>
+        </select>
+        <button class="btn btn-primary" type="submit">筛选</button>
+    </form>
+</section>
+<section class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+            <tr>
+                <th>老人</th>
+                <th>房间</th>
+                <th>告警标题</th>
+                <th>类型</th>
+                <th>等级</th>
+                <th>状态</th>
+                <th>时间</th>
+                <th>处置</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="alerts" id="item"}
+            <tr>
+                <td>{$item.name}</td>
+                <td>{$item.room}</td>
+                <td>{$item.title}</td>
+                <td>{$item.alert_type}</td>
+                <td>{$item.level}</td>
+                <td>{$item.status}</td>
+                <td>{$item.created_at}</td>
+                <td>
+                    <form class="inline-form" method="post" action="{$item.handle_url}">
+                        <select name="status">
+                            <option value="已处理">已处理</option>
+                            <option value="已忽略">已忽略</option>
+                        </select>
+                        <input type="text" name="handled_note" placeholder="填写处理说明">
+                        <button class="btn btn-primary" type="submit">提交</button>
+                    </form>
+                </td>
+            </tr>
+            <tr class="sub-row">
+                <td colspan="8"><strong>说明：</strong>{$item.content} {notempty name="item.handled_note"}/ <strong>已处理备注：</strong>{$item.handled_note}{/notempty}</td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

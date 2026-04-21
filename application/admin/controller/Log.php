@@ -2,14 +2,16 @@
 
 namespace app\admin\controller;
 
-class Log extends BaseController
+use think\Db;
+
+class Log extends Base
 {
     public function index()
     {
-        return $this->renderPage('log', [
+        $this->assign([
             'pageTitle' => '运营日志',
-            'pageDescription' => '记录告警处理、档案修改、排班调整等关键操作。',
-            'logs' => $this->repo->logs(),
+            'logs'      => Db::name('operation_log')->order('id desc')->limit(100)->select(),
         ]);
+        return $this->fetch();
     }
 }
