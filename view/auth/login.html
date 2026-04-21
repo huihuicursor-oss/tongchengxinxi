@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台登录 - 智慧养老综合管理平台</title>
+    <link rel="stylesheet" href="{$appBase}/static/app.css">
+</head>
+<body class="login-body">
+<div class="login-shell">
+    <section class="login-hero">
+        <span class="badge badge-soft">智慧养老后台</span>
+        <h1>养老机构、社区居家与护理执行一体化管理系统</h1>
+        <p>根据墨刀养老服务平台与护理端原型思路，重构为完整后台：覆盖老人档案、护理执行、服务工单、慢病健康、用药提醒、家属联络、活动中心、费用结算。</p>
+        <ul class="tip-list">
+            <li>老人全生命周期档案管理</li>
+            <li>楼栋/床位/护理任务执行闭环</li>
+            <li>慢病监测、用药计划与家属同步</li>
+            <li>养老服务、活动、账单统一运营</li>
+        </ul>
+    </section>
+    <section class="card login-card">
+        <div class="section-head">
+            <h2>系统登录</h2>
+            <span>请输入账号密码进入管理后台</span>
+        </div>
+        {if $error}
+        <div class="alert alert-error">{$error}</div>
+        {/if}
+        <form method="post" action="{$appBase}/login" class="form-grid">
+            <label class="form-field full">
+                <span>账号</span>
+                <input type="text" name="username" value="{$lastUsername}" placeholder="请输入账号">
+            </label>
+            <label class="form-field full">
+                <span>密码</span>
+                <input type="password" name="password" placeholder="请输入密码">
+            </label>
+            <div class="form-actions full">
+                <button type="submit" class="button button-primary">登录后台</button>
+            </div>
+        </form>
+        <div class="card subtle">
+            <div class="section-head"><h3>演示账号</h3><span>默认密码</span></div>
+            <div class="module-list">
+                <li>admin / Admin@123456</li>
+                <li>operator / Operator@123456</li>
+                <li>viewer / Viewer@123456</li>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

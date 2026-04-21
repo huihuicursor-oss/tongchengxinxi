@@ -1,0 +1,36 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="healthStats" id="item" key="idx"}
+    <div class="stat-tile summary-{if $idx==1}orange{elseif $idx==2}cyan{elseif $idx==3}green{else /}purple{/if}"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<div class="grid cols-2">
+    <section class="card table-card">
+        <div class="section-head"><h2>健康监测记录</h2><span>慢病档案 / 风险预警</span></div>
+        <div class="table-wrapper"><table><thead><tr><th>老人</th><th>血压</th><th>血糖</th><th>心率</th><th>睡眠</th><th>风险</th><th>更新时间</th><th>说明</th></tr></thead><tbody>
+        {volist name="records" id="item"}
+        <tr>
+            <td><a href="{$appBase}/elders/{$item.elderId}"><strong>{$item.name}</strong></a></td>
+            <td>{$item.bloodPressure}</td>
+            <td>{$item.bloodSugar}</td>
+            <td>{$item.heartRate}</td>
+            <td>{$item.sleep} 小时</td>
+            <td><span class="badge {$item.riskClass}">{$item.risk}</span></td>
+            <td>{$item.updatedAt}</td>
+            <td>{$item.notes}</td>
+        </tr>
+        {/volist}
+        </tbody></table></div>
+    </section>
+    <section class="card subtle">
+        <div class="section-head"><h2>原型映射说明</h2><span>护理/慢病原型对应</span></div>
+        <ul class="tip-list">
+            <li>可继续拓展血压曲线、血糖趋势、设备告警历史。</li>
+            <li>风险高的老人可联动家属通知和护理执行任务。</li>
+            <li>后续可增加长者端或家属端同步查看健康日报。</li>
+        </ul>
+    </section>
+</div>
+{/block}

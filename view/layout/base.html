@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{$pageTitle} - {$systemTitle}</title>
+    <link rel="stylesheet" href="{$appBase}/static/app.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">YL</div>
+            <div>
+                <div class="brand-title">{$systemTitle}</div>
+                <div class="brand-subtitle">养老机构 / 居家服务 / 护理执行一体化</div>
+            </div>
+        </div>
+        <div class="sidebar-group-title">系统导航</div>
+        <nav class="sidebar-nav">
+            {volist name="navigation" id="item"}
+            <a class="nav-item {$item.activeClass}" href="{$item.url}">
+                <div class="nav-main">
+                    <strong>{$item.label}</strong>
+                    <span>{$item.caption}</span>
+                </div>
+                <span class="nav-badge"></span>
+            </a>
+            {/volist}
+        </nav>
+        <div class="sidebar-panel">
+            <div class="sidebar-panel-title">当前登录</div>
+            <p>{$currentUser.name|default='未登录'} / {$currentRoleLabel|default='未登录'}</p>
+            <p>已切换为管理系统样式，适合根据养老后台原型继续精修各页面。</p>
+        </div>
+    </aside>
+    <main class="content">
+        <header class="topbar">
+            <div>
+                <h1>{$pageTitle}</h1>
+                <p>围绕档案、护理、服务、健康、家属、费用构建完整养老管理闭环</p>
+            </div>
+            <div class="topbar-actions">
+                <span class="chip">MySQL 业务数据</span>
+                <span class="chip">ThinkPHP 8</span>
+                <span class="chip">{$currentUser.username|default='guest'}</span>
+                <a class="button button-light" href="{$appBase}/logout">退出登录</a>
+            </div>
+        </header>
+        <section class="page-body">
+            {block name="content"}{/block}
+        </section>
+    </main>
+</div>
+</body>
+</html>

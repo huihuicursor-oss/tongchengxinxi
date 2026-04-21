@@ -1,0 +1,100 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="toolbar">
+    <div class="toolbar-actions">
+        <a class="button button-light" href="{$appBase}/elders">返回档案</a>
+        {if $canManageElders}<a class="button button-primary" href="{$appBase}/elders/{$elder.id}/edit">编辑档案</a>{/if}
+    </div>
+    <div class="toolbar-actions">
+        <span class="badge {$elder.statusClass}">{$elder.status}</span>
+        <span class="chip">健康分 {$elder.healthScore}</span>
+    </div>
+</div>
+
+<section class="card">
+    <div class="section-head"><h2>{$elder.name} 档案总览</h2><span>最近更新 {$elder.updatedAt}</span></div>
+    <div class="detail-grid">
+        <div class="detail-item"><span>基础信息</span><strong>{$elder.gender} / {$elder.age} 岁 / {$elder.phone}</strong></div>
+        <div class="detail-item"><span>服务模式</span><strong>{$elder.serviceMode}</strong></div>
+        <div class="detail-item"><span>房间床位</span><strong>{$elder.room}</strong></div>
+        <div class="detail-item"><span>护理等级</span><strong>{$elder.careLevel}</strong></div>
+        <div class="detail-item span-2"><span>主联系人</span><strong>{$elder.contactName} / {$elder.contactPhone}</strong></div>
+        <div class="detail-item span-2"><span>标签</span><strong>{$elder.tags}</strong></div>
+        <div class="detail-item span-4"><span>护理备注</span><strong>{$elder.remark}</strong></div>
+    </div>
+</section>
+
+<div class="grid cols-2">
+    <section class="card">
+        <div class="section-head"><h2>家属联络</h2><span>亲情同步与回访</span></div>
+        <div class="stack-list">
+            {volist name="familyContacts" id="item"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$item.name} / {$item.relation}</strong>{if $item.primary}<span class="badge badge-success">主联系人</span>{else /}<span class="badge badge-soft">{$item.concernLevel}</span>{/if}</div>
+                <p>{$item.phone} / 微信 {$item.wechat}</p>
+                <small>最近联系 {$item.lastContact} · {$item.remark}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+    <section class="card">
+        <div class="section-head"><h2>用药计划</h2><span>药品与提醒</span></div>
+        <div class="stack-list">
+            {volist name="medicationPlans" id="item"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$item.medicine}</strong><span class="badge {$item.statusClass}">{$item.status}</span></div>
+                <p>{$item.scheduleTime} · {$item.dosage} · {$item.frequency}</p>
+                <small>执行人 {$item.executor} · {$item.notes}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+</div>
+
+<div class="grid cols-3">
+    <section class="card">
+        <div class="section-head"><h2>护理任务</h2><span>楼栋床位执行</span></div>
+        <div class="stack-list">
+            {volist name="careTasks" id="item"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$item.type}</strong><span class="badge {$item.statusClass}">{$item.status}</span></div>
+                <p>{$item.ward} / {$item.bedNo} · {$item.scheduleTime}</p>
+                <small>{$item.executor} · {$item.priority}优先级 · {$item.notes}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+    <section class="card">
+        <div class="section-head"><h2>健康记录</h2><span>慢病/睡眠/风险</span></div>
+        <div class="stack-list">
+            {volist name="healthRecords" id="item"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$item.recordedAt}</strong><span class="badge {$item.riskClass}">{$item.risk}</span></div>
+                <p>血压 {$item.bloodPressure} · 血糖 {$item.bloodSugar} · 心率 {$item.heartRate}</p>
+                <small>睡眠 {$item.sleep} · {$item.notes}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+    <section class="card">
+        <div class="section-head"><h2>服务/账单</h2><span>履约与费用</span></div>
+        <div class="stack-list">
+            {volist name="serviceOrders" id="item"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$item.type}</strong><span class="badge {$item.statusClass}">{$item.status}</span></div>
+                <p>{$item.appointTime} · {$item.staff}</p>
+                <small>{$item.code} · {$item.notes}</small>
+            </article>
+            {/volist}
+            {volist name="billingRecords" id="bill"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$bill.item}</strong><span class="badge {$bill.statusClass}">{$bill.status}</span></div>
+                <p>{$bill.month} · {$bill.amount}</p>
+                <small>到期 {$bill.dueDate} · {$bill.remark}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+</div>
+{/block}

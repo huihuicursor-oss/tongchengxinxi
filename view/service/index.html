@@ -1,0 +1,26 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="summary" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<section class="card table-card">
+    <div class="section-head"><h2>服务工单中心</h2><span>助餐 / 陪诊 / 巡检 / 康复训练</span></div>
+    <div class="table-wrapper"><table><thead><tr><th>工单编号</th><th>服务对象</th><th>服务类型</th><th>服务地点</th><th>预约时间</th><th>执行人员</th><th>状态</th><th>备注</th></tr></thead><tbody>
+    {volist name="orders" id="order"}
+    <tr>
+        <td>{$order.code}</td>
+        <td><a href="{$appBase}/elders/{$order.elderId}"><strong>{$order.name}</strong></a></td>
+        <td>{$order.type}</td>
+        <td>{$order.address}</td>
+        <td>{$order.appointTime}</td>
+        <td>{$order.staff}</td>
+        <td><span class="badge {$order.statusClass}">{$order.status}</span></td>
+        <td>{$order.notes}</td>
+    </tr>
+    {/volist}
+    </tbody></table></div>
+</section>
+{/block}

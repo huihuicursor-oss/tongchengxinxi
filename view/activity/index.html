@@ -1,0 +1,31 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="activityStats" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<div class="grid cols-2">
+    {volist name="activities" id="item"}
+    <section class="card">
+        <div class="section-head"><h2>{$item.title}</h2><span class="badge badge-soft">{$item.status}</span></div>
+        <div class="info-list">
+            <div class="info-item"><strong>时间</strong><span>{$item.date}</span></div>
+            <div class="info-item"><strong>地点</strong><span>{$item.location}</span></div>
+            <div class="info-item"><strong>参与情况</strong><span>{$item.participants}</span></div>
+            <div class="info-item"><strong>负责部门</strong><span>{$item.owner}</span></div>
+            <div class="info-item"><strong>活动说明</strong><span>{$item.description}</span></div>
+        </div>
+    </section>
+    {/volist}
+    <section class="card subtle">
+        <div class="section-head"><h2>活动运营建议</h2><span>贴合养老服务原型</span></div>
+        <ul class="tip-list">
+            <li>增加报名二维码、签到记录、照片回传和满意度调查。</li>
+            <li>支持健康宣教、生日会、兴趣课程、节庆活动等分类。</li>
+            <li>后续可扩展到长者端查看活动详情与报名入口。</li>
+        </ul>
+    </section>
+</div>
+{/block}
