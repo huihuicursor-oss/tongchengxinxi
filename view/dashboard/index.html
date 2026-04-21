@@ -1,0 +1,92 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="grid cols-4 summary-grid">
+    {volist name="summaryCards" id="card"}
+    <section class="card metric-card">
+        <div class="metric-label">{$card.label}</div>
+        <div class="metric-value">{$card.value}</div>
+        <div class="metric-trend">{$card.trend}</div>
+    </section>
+    {/volist}
+</div>
+
+<div class="grid cols-2">
+    <section class="card">
+        <div class="section-head">
+            <h2>服务类型分布</h2>
+            <span>本周工单</span>
+        </div>
+        <div class="progress-list">
+            {volist name="serviceStats" id="item"}
+            <div class="progress-item">
+                <div class="progress-meta">
+                    <span>{$item.label}</span>
+                    <strong>{$item.value}</strong>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-bar" style="width: {$item.value}%;"></div>
+                </div>
+            </div>
+            {/volist}
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="section-head">
+            <h2>今日排程</h2>
+            <span>按时间顺序</span>
+        </div>
+        <div class="timeline">
+            {volist name="schedule" id="item"}
+            <div class="timeline-item">
+                <div class="timeline-time">{$item.time}</div>
+                <div>
+                    <div class="timeline-title">{$item.task}</div>
+                    <div class="timeline-desc">负责人：{$item.owner}</div>
+                </div>
+            </div>
+            {/volist}
+        </div>
+    </section>
+</div>
+
+<div class="grid cols-2">
+    <section class="card">
+        <div class="section-head">
+            <h2>通知公告</h2>
+            <span>最新 3 条</span>
+        </div>
+        <div class="stack-list">
+            {volist name="notices" id="notice"}
+            <article class="stack-item">
+                <div class="stack-head">
+                    <strong>{$notice.title}</strong>
+                    <span class="badge badge-soft">{$notice.level}</span>
+                </div>
+                <p>{$notice.content}</p>
+                <small>{$notice.time}</small>
+            </article>
+            {/volist}
+        </div>
+    </section>
+
+    <section class="card">
+        <div class="section-head">
+            <h2>风险预警</h2>
+            <span>需要持续跟进</span>
+        </div>
+        <div class="stack-list">
+            {volist name="alerts" id="alert"}
+            <article class="stack-item warning-item">
+                <div class="stack-head">
+                    <strong>{$alert.name} / {$alert.type}</strong>
+                    <span class="badge {$alert.statusClass}">{$alert.status}</span>
+                </div>
+                <p>{$alert.detail}</p>
+            </article>
+            {/volist}
+        </div>
+    </section>
+</div>
+{/block}

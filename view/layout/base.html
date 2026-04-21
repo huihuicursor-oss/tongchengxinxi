@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{$pageTitle} - {$systemTitle}</title>
+    <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">YL</div>
+            <div>
+                <div class="brand-title">{$systemTitle}</div>
+                <div class="brand-subtitle">ThinkPHP Demo</div>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            {volist name="navigation" id="item"}
+            <a class="nav-item {$item.activeClass}" href="{$item.url}">{$item.label}</a>
+            {/volist}
+        </nav>
+        <div class="sidebar-panel">
+            <div class="sidebar-panel-title">适老化设计</div>
+            <p>大字号、高对比度、浅层导航，适合作为原型落地后的前台管理端演示版本。</p>
+        </div>
+    </aside>
+    <main class="content">
+        <header class="topbar">
+            <div>
+                <h1>{$pageTitle}</h1>
+                <p>养老机构、社区居家与护理服务的一体化运营视图</p>
+            </div>
+            <div class="topbar-actions">
+                <span class="chip">实时演示数据</span>
+                <span class="chip chip-primary">日期 2026-04-21</span>
+            </div>
+        </header>
+        <section class="page-body">
+            {block name="content"}{/block}
+        </section>
+    </main>
+</div>
+</body>
+</html>

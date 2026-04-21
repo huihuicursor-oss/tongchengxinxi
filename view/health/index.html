@@ -1,0 +1,53 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="grid cols-2">
+    <section class="card">
+        <div class="section-head">
+            <h2>实时健康监测</h2>
+            <span>血压、血糖、心率、睡眠</span>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>血压</th>
+                    <th>血糖</th>
+                    <th>心率</th>
+                    <th>睡眠</th>
+                    <th>风险</th>
+                    <th>更新时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {volist name="records" id="item"}
+                <tr>
+                    <td><strong>{$item.name}</strong></td>
+                    <td>{$item.bloodPressure}</td>
+                    <td>{$item.bloodSugar}</td>
+                    <td>{$item.heartRate}</td>
+                    <td>{$item.sleep}</td>
+                    <td><span class="badge {$item.riskClass}">{$item.risk}</span></td>
+                    <td>{$item.updatedAt}</td>
+                </tr>
+                {/volist}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card info-panel">
+        <div class="section-head">
+            <h2>慢病管理建议</h2>
+            <span>原型落地建议模块</span>
+        </div>
+        <ul class="bullet-list">
+            <li>高血压老人自动标记颜色预警，并要求二次复测确认。</li>
+            <li>糖尿病老人可按周生成用药与饮食随访计划。</li>
+            <li>夜间离床、跌倒、睡眠不足可接入硬件告警设备。</li>
+            <li>支持家属端同步查看日报、异常提醒和护理记录。</li>
+        </ul>
+    </section>
+</div>
+{/block}

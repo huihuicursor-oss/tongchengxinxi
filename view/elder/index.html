@@ -1,0 +1,40 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<section class="card">
+    <div class="section-head">
+        <h2>老人档案总览</h2>
+        <span>支持后续接入数据库与检索条件</span>
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>姓名</th>
+                <th>性别/年龄</th>
+                <th>居住位置</th>
+                <th>家属联系方式</th>
+                <th>标签</th>
+                <th>状态</th>
+                <th>健康分</th>
+                <th>最近服务</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="elders" id="elder"}
+            <tr>
+                <td><strong>{$elder.name}</strong></td>
+                <td>{$elder.gender} / {$elder.age} 岁</td>
+                <td>{$elder.room}</td>
+                <td>{$elder.contact}</td>
+                <td>{$elder.tags}</td>
+                <td><span class="badge {$elder.statusClass}">{$elder.status}</span></td>
+                <td>{$elder.health}</td>
+                <td>{$elder.lastService}</td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

@@ -1,0 +1,38 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<section class="card">
+    <div class="section-head">
+        <h2>服务工单中心</h2>
+        <span>覆盖助餐、陪诊、护理、巡检等服务流程</span>
+    </div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>工单编号</th>
+                <th>服务对象</th>
+                <th>服务类型</th>
+                <th>地点</th>
+                <th>预约时间</th>
+                <th>执行人员</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody>
+            {volist name="orders" id="order"}
+            <tr>
+                <td>{$order.code}</td>
+                <td><strong>{$order.name}</strong></td>
+                <td>{$order.type}</td>
+                <td>{$order.address}</td>
+                <td>{$order.appointTime}</td>
+                <td>{$order.staff}</td>
+                <td><span class="badge {$order.statusClass}">{$order.status}</span></td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+</section>
+{/block}

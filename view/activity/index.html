@@ -1,0 +1,31 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="grid cols-2">
+    {volist name="activities" id="item"}
+    <section class="card activity-card">
+        <div class="activity-date">{$item.date}</div>
+        <h2>{$item.title}</h2>
+        <p>地点：{$item.location}</p>
+        <p>参与情况：{$item.participants}</p>
+        <p>负责部门：{$item.owner}</p>
+        <div class="activity-footer">
+            <span class="badge badge-soft">{$item.status}</span>
+            <span>可继续扩展报名、签到、照片回传</span>
+        </div>
+    </section>
+    {/volist}
+
+    <section class="card info-panel">
+        <div class="section-head">
+            <h2>公告与活动运营</h2>
+            <span>符合养老平台原型常见模块</span>
+        </div>
+        <ul class="bullet-list">
+            <li>支持按活动类型区分健康宣教、节庆活动、兴趣课程和义诊。</li>
+            <li>可以继续接入短信/微信通知，提醒老人及家属准时参与。</li>
+            <li>后台可沉淀报名记录、签到记录、满意度回访与活动照片。</li>
+        </ul>
+    </section>
+</div>
+{/block}
