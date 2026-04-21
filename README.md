@@ -19,7 +19,7 @@
 
 - PHP 8.2+
 - Composer
-- MySQL / MariaDB
+- MySQL 8+
 
 ## 数据库配置
 
