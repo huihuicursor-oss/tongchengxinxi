@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace app\controller;
 
 use app\BaseController;
-use think\facade\Session;
 use think\facade\View;
 
 abstract class AdminBaseController extends BaseController
@@ -13,7 +12,7 @@ abstract class AdminBaseController extends BaseController
 
     protected function initialize(): void
     {
-        $this->currentUser = Session::get('admin_user', []);
+        $this->currentUser = $_SESSION['admin_user'] ?? [];
         View::assign('currentUser', $this->currentUser);
         View::assign('currentRoleLabel', $this->getRoleLabel($this->currentUser['role'] ?? ''));
         View::assign('canManageElders', $this->canManageElders());

@@ -36,7 +36,7 @@ class InitDemo extends Command
         $this->seedNotices();
         $output->writeln('Demo data initialized successfully.');
 
-        return self::SUCCESS;
+        return 0;
     }
 
     private function createTables(): void

@@ -6,7 +6,7 @@ return [
     'url_case_sensitive'    => false,
     'route_auto_group'      => false,
     'route_rule_merge'      => false,
-    'route_complete_match'  => false,
+    'route_complete_match'  => true,
     'remove_slash'          => false,
     'default_route_pattern' => '[\w\.]+',
     'url_html_suffix'       => '',

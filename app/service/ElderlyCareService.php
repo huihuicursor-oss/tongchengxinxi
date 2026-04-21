@@ -78,18 +78,19 @@ class ElderlyCareService
 
     public function getElders(string $keyword = ''): array
     {
-        $query = Elder::order('update_time', 'desc');
-        if ($keyword !== '') {
-            $query->where(function ($subQuery) use ($keyword) {
-                $subQuery->whereLike('name', '%' . $keyword . '%')
-                    ->whereOrLike('room', '%' . $keyword . '%')
-                    ->whereOrLike('contact_name', '%' . $keyword . '%')
-                    ->whereOrLike('tags', '%' . $keyword . '%');
-            });
-        }
-
         $elders = [];
-        foreach ($query->select() as $elder) {
+        foreach (Elder::order('update_time', 'desc')->select() as $elder) {
+            if ($keyword !== '') {
+                $haystack = implode(' ', [
+                    (string) $elder->name,
+                    (string) $elder->room,
+                    (string) $elder->contact_name,
+                    (string) $elder->tags,
+                ]);
+                if (mb_stripos($haystack, $keyword) === false) {
+                    continue;
+                }
+            }
             $latestOrder = ServiceOrder::where('elder_id', $elder->id)->order('appoint_time', 'desc')->find();
             $elders[] = [
                 'id' => (int) $elder->id,

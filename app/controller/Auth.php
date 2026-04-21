@@ -5,14 +5,13 @@ namespace app\controller;
 
 use app\BaseController;
 use app\model\AdminUser;
-use think\facade\Session;
 use think\facade\View;
 
 class Auth extends BaseController
 {
     public function loginForm()
     {
-        if (Session::has('admin_user')) {
+        if (isset($_SESSION['admin_user'])) {
             return redirect('/dashboard');
         }
 
@@ -56,7 +55,7 @@ class Auth extends BaseController
             'role' => (string) $user->role,
         ];
 
-        Session::set('admin_user', $sessionUser);
+        $_SESSION['admin_user'] = $sessionUser;
         $user->save(['last_login_at' => date('Y-m-d H:i:s')]);
 
         return redirect('/dashboard');
@@ -64,7 +63,7 @@ class Auth extends BaseController
 
     public function logout()
     {
-        Session::delete('admin_user');
+        unset($_SESSION['admin_user']);
 
         return redirect('/login');
     }
