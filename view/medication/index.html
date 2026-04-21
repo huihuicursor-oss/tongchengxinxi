@@ -1,0 +1,26 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="medStats" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<section class="card table-card">
+    <div class="section-head"><h2>用药提醒中心</h2><span>发药、核对、执行记录</span></div>
+    <div class="table-wrapper"><table><thead><tr><th>老人</th><th>药品名称</th><th>剂量</th><th>频次</th><th>计划时间</th><th>执行人</th><th>状态</th><th>备注</th></tr></thead><tbody>
+    {volist name="plans" id="item"}
+    <tr>
+        <td><a href="{$appBase}/elders/{$item.elderId}"><strong>{$item.elder}</strong></a></td>
+        <td>{$item.medicine}</td>
+        <td>{$item.dosage}</td>
+        <td>{$item.frequency}</td>
+        <td>{$item.scheduleTime}</td>
+        <td>{$item.executor}</td>
+        <td><span class="badge {$item.statusClass}">{$item.status}</span></td>
+        <td>{$item.notes}</td>
+    </tr>
+    {/volist}
+    </tbody></table></div>
+</section>
+{/block}

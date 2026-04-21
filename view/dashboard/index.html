@@ -1,51 +1,65 @@
 {extend name="layout/base" /}
 
 {block name="content"}
-<div class="grid cols-4 summary-grid">
-    {volist name="summaryCards" id="card"}
-    <section class="card metric-card">
-        <div class="metric-label">{$card.label}</div>
-        <div class="metric-value">{$card.value}</div>
-        <div class="metric-trend">{$card.trend}</div>
+<div class="grid cols-6">
+    {volist name="summaryCards" id="card" key="idx"}
+    <section class="card summary-card summary-{if $idx==1}blue{elseif $idx==2}orange{elseif $idx==3}cyan{elseif $idx==4}purple{elseif $idx==5}orange{else /}green{/if}">
+        <div class="summary-label">{$card.label}</div>
+        <div class="summary-value">{$card.value}</div>
+        <div class="summary-foot">{$card.trend}</div>
     </section>
     {/volist}
 </div>
 
-<div class="grid cols-2">
+<section class="card">
+    <div class="section-head">
+        <h2>快捷入口</h2>
+        <span>按养老管理原型常见工作流组织</span>
+    </div>
+    <div class="quick-entry-grid">
+        {volist name="quickEntries" id="item"}
+        <a class="quick-entry" href="{$item.url}">
+            <strong>{$item.label}</strong>
+            <span>{$item.count}</span>
+        </a>
+        {/volist}
+    </div>
+</section>
+
+<div class="grid cols-3">
     <section class="card">
-        <div class="section-head">
-            <h2>服务类型分布</h2>
-            <span>来源于 service_orders 表</span>
-        </div>
+        <div class="section-head"><h2>服务分布</h2><span>近期工单类型</span></div>
         <div class="progress-list">
-            {volist name="serviceStats" id="item"}
+            {volist name="serviceOverview" id="item"}
             <div class="progress-item">
-                <div class="progress-meta">
-                    <span>{$item.label}</span>
-                    <strong>{$item.count} 单</strong>
-                </div>
-                <div class="progress-track">
-                    <div class="progress-bar" style="width: {$item.value}%;"></div>
+                <div class="progress-meta"><span>{$item.label}</span><strong>{$item.value} 单</strong></div>
+                <div class="progress-track"><div class="progress-bar" style="width: {$item.percent}%"></div></div>
+            </div>
+            {/volist}
+        </div>
+    </section>
+    <section class="card">
+        <div class="section-head"><h2>护理执行看板</h2><span>今日重点任务</span></div>
+        <div class="timeline">
+            {volist name="careBoard" id="item"}
+            <div class="timeline-item">
+                <div class="timeline-time">{$item.time}</div>
+                <div>
+                    <div class="timeline-title">{$item.elder} / {$item.task}</div>
+                    <div class="timeline-desc">{$item.ward} · {$item.executor} · <span class="badge {$item.statusClass}">{$item.status}</span></div>
                 </div>
             </div>
             {/volist}
         </div>
     </section>
-
     <section class="card">
-        <div class="section-head">
-            <h2>今日排程</h2>
-            <span>按工单预约时间排序</span>
-        </div>
-        <div class="timeline">
-            {volist name="schedule" id="item"}
-            <div class="timeline-item">
-                <div class="timeline-time">{$item.time}</div>
-                <div>
-                    <div class="timeline-title">{$item.task}</div>
-                    <div class="timeline-desc">执行人：{$item.owner}</div>
-                </div>
-            </div>
+        <div class="section-head"><h2>用药提醒</h2><span>发药与核对</span></div>
+        <div class="stack-list">
+            {volist name="medicationAlerts" id="item"}
+            <article class="stack-item">
+                <div class="stack-head"><strong>{$item.elder} / {$item.medicine}</strong><span class="badge {$item.statusClass}">{$item.status}</span></div>
+                <p>{$item.time} · {$item.dosage} · 执行人 {$item.executor}</p>
+            </article>
             {/volist}
         </div>
     </section>
@@ -53,37 +67,24 @@
 
 <div class="grid cols-2">
     <section class="card">
-        <div class="section-head">
-            <h2>通知公告</h2>
-            <span>来源于 notices 表</span>
-        </div>
+        <div class="section-head"><h2>通知公告</h2><span>运营消息</span></div>
         <div class="stack-list">
-            {volist name="notices" id="notice"}
+            {volist name="noticeFeed" id="item"}
             <article class="stack-item">
-                <div class="stack-head">
-                    <strong>{$notice.title}</strong>
-                    <span class="badge badge-soft">{$notice.level}</span>
-                </div>
-                <p>{$notice.content}</p>
-                <small>{$notice.time}</small>
+                <div class="stack-head"><strong>{$item.title}</strong><span class="badge badge-soft">{$item.level}</span></div>
+                <p>{$item.content}</p>
+                <small>{$item.time}</small>
             </article>
             {/volist}
         </div>
     </section>
-
     <section class="card">
-        <div class="section-head">
-            <h2>风险预警</h2>
-            <span>来自健康监测记录</span>
-        </div>
-        <div class="stack-list">
-            {volist name="alerts" id="alert"}
-            <article class="stack-item warning-item">
-                <div class="stack-head">
-                    <strong>{$alert.name} / {$alert.type}</strong>
-                    <span class="badge {$alert.statusClass}">{$alert.status}</span>
-                </div>
-                <p>{$alert.detail}</p>
+        <div class="section-head"><h2>费用提醒</h2><span>待收账款概览</span></div>
+        <div class="bill-list">
+            {volist name="billingOverview" id="item"}
+            <article class="bill-item">
+                <div class="bill-row"><strong>{$item.elder} / {$item.item}</strong><span>{$item.amount}</span></div>
+                <div class="bill-row"><small>应收日期 {$item.dueDate}</small><span class="badge {$item.statusClass}">{$item.status}</span></div>
             </article>
             {/volist}
         </div>

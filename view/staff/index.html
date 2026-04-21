@@ -1,49 +1,33 @@
 {extend name="layout/base" /}
 
 {block name="content"}
+<div class="stats-row">
+    {volist name="shiftStats" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
 <div class="grid cols-2">
-    <section class="card">
-        <div class="section-head">
-            <h2>护理排班表</h2>
-            <span>数据来自 care_staff 表</span>
-        </div>
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                <tr>
-                    <th>姓名</th>
-                    <th>岗位</th>
-                    <th>班次</th>
-                    <th>任务量</th>
-                    <th>联系电话</th>
-                    <th>状态</th>
-                </tr>
-                </thead>
-                <tbody>
-                {volist name="staffList" id="staff"}
-                <tr>
-                    <td><strong>{$staff.name}</strong></td>
-                    <td>{$staff.role}</td>
-                    <td>{$staff.shift}</td>
-                    <td>{$staff.tasks}</td>
-                    <td>{$staff.phone}</td>
-                    <td><span class="badge {$staff.statusClass}">{$staff.status}</span></td>
-                </tr>
-                {/volist}
-                </tbody>
-            </table>
-        </div>
+    <section class="card table-card">
+        <div class="section-head"><h2>护理排班</h2><span>班次 / 岗位 / 任务量</span></div>
+        <div class="table-wrapper"><table><thead><tr><th>姓名</th><th>岗位</th><th>班次</th><th>任务量</th><th>联系电话</th><th>状态</th></tr></thead><tbody>
+        {volist name="staffList" id="staff"}
+        <tr>
+            <td><strong>{$staff.name}</strong></td>
+            <td>{$staff.role}</td>
+            <td>{$staff.shift}</td>
+            <td>{$staff.tasks}</td>
+            <td>{$staff.phone}</td>
+            <td><span class="badge {$staff.statusClass}">{$staff.status}</span></td>
+        </tr>
+        {/volist}
+        </tbody></table></div>
     </section>
-
-    <section class="card info-panel">
-        <div class="section-head">
-            <h2>权限扩展位</h2>
-            <span>可继续接审批与排班权限</span>
-        </div>
-        <ul class="bullet-list">
-            <li>可继续增加请假、调班、替班审批。</li>
-            <li>可按楼层、护理级别、服务网格继续细分排班。</li>
-            <li>如果你给我原型截图，我可以继续改成排班看板或日历视图。</li>
+    <section class="card subtle">
+        <div class="section-head"><h2>排班说明</h2><span>可继续接审批流程</span></div>
+        <ul class="tip-list">
+            <li>可继续扩展请假、调班、替班申请。</li>
+            <li>可按楼栋、失能等级、网格服务进一步拆分。</li>
+            <li>也可改造成周排班、日历排班或护理交接班视图。</li>
         </ul>
     </section>
 </div>

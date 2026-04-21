@@ -1,46 +1,44 @@
 {extend name="layout/base" /}
 
 {block name="content"}
-<div class="toolbar card-inline">
+<div class="toolbar">
     <form class="toolbar-search" method="get" action="{$appBase}/elders">
-        <input type="text" name="keyword" value="{$keyword}" placeholder="搜索老人姓名、房间、联系人或标签">
-        <button type="submit" class="button button-primary">查询</button>
+        <input type="text" name="keyword" value="{$keyword}" placeholder="搜索老人姓名 / 房间 / 标签 / 家属">
+        <select><option>全部服务模式</option><option>机构养老</option><option>社区居家</option><option>居家上门</option></select>
+        <select><option>全部状态</option><option>重点关注</option><option>随访中</option><option>稳定</option></select>
+        <button type="submit" class="button button-primary">查询筛选</button>
     </form>
     <div class="toolbar-actions">
         {if $canManageElders}
         <a class="button button-primary" href="{$appBase}/elders/create">新增老人档案</a>
-        {else /}
-        <span class="badge badge-soft">当前账号为只读，无法新增或编辑</span>
         {/if}
+        <a class="button button-light" href="{$appBase}/families">查看家属台账</a>
     </div>
 </div>
 
-<div class="grid cols-4 summary-grid compact-grid">
-    {volist name="elderStats" id="card"}
-    <section class="card metric-card metric-card-small">
-        <div class="metric-label">{$card.label}</div>
-        <div class="metric-value">{$card.value}</div>
-    </section>
+<div class="stats-row">
+    {volist name="elderStats" id="item" key="idx"}
+    <div class="stat-tile summary-{if $idx==1}blue{elseif $idx==2}orange{elseif $idx==3}cyan{else /}purple{/if}">
+        <span>{$item.label}</span>
+        <strong>{$item.value}</strong>
+        <span>{$item.desc}</span>
+    </div>
     {/volist}
 </div>
 
-<section class="card">
-    <div class="section-head">
-        <h2>老人档案总览</h2>
-        <span>已切换为 MySQL 数据源</span>
-    </div>
+<section class="card table-card">
+    <div class="section-head"><h2>老人档案总览</h2><span>按原型管理后台方式呈现档案表格</span></div>
     <div class="table-wrapper">
         <table>
             <thead>
             <tr>
-                <th>姓名</th>
-                <th>性别/年龄</th>
-                <th>服务模式</th>
-                <th>居住位置</th>
-                <th>家属联系方式</th>
+                <th>老人信息</th>
+                <th>服务模式 / 护理等级</th>
+                <th>房间 / 地址</th>
+                <th>主联系人</th>
                 <th>标签</th>
-                <th>状态</th>
                 <th>健康分</th>
+                <th>档案状态</th>
                 <th>最近服务</th>
                 <th>操作</th>
             </tr>
@@ -48,21 +46,18 @@
             <tbody>
             {volist name="elders" id="elder"}
             <tr>
-                <td><strong>{$elder.name}</strong></td>
-                <td>{$elder.gender} / {$elder.age} 岁</td>
-                <td>{$elder.serviceMode}</td>
-                <td>{$elder.room}</td>
-                <td>{$elder.contact}</td>
+                <td><div class="table-title"><strong>{$elder.name}</strong><span>{$elder.gender} / {$elder.age} 岁</span></div></td>
+                <td><div class="table-title"><strong>{$elder.serviceMode}</strong><span>{$elder.careLevel}</span></div></td>
+                <td><div class="table-title"><strong>{$elder.room}</strong><span>服务地址：{$elder.room}</span></div></td>
+                <td><div class="table-title"><strong>{$elder.family}</strong><span>{$elder.phone}</span></div></td>
                 <td>{$elder.tags}</td>
+                <td><strong>{$elder.health}</strong></td>
                 <td><span class="badge {$elder.statusClass}">{$elder.status}</span></td>
-                <td>{$elder.health}</td>
                 <td>{$elder.lastService}</td>
                 <td>
                     <div class="table-actions">
-                        <a href="{$appBase}/elders/{$elder.id}">查看</a>
-                        {if $canManageElders}
-                        <a href="{$appBase}/elders/{$elder.id}/edit">编辑</a>
-                        {/if}
+                        <a href="{$appBase}/elders/{$elder.id}">详情</a>
+                        {if $canManageElders}<a href="{$appBase}/elders/{$elder.id}/edit">编辑</a>{/if}
                     </div>
                 </td>
             </tr>

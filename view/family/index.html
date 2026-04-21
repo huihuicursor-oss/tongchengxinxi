@@ -1,0 +1,26 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="familyStats" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<section class="card table-card">
+    <div class="section-head"><h2>家属联络台账</h2><span>主联系人 / 高关注 / 回访备注</span></div>
+    <div class="table-wrapper"><table><thead><tr><th>老人</th><th>联系人</th><th>关系</th><th>电话</th><th>微信</th><th>关注等级</th><th>最近联系</th><th>备注</th></tr></thead><tbody>
+    {volist name="contacts" id="item"}
+    <tr>
+        <td><a href="{$appBase}/elders/{$item.elderId}"><strong>{$item.elder}</strong></a></td>
+        <td><div class="table-title"><strong>{$item.name}</strong><span>{if $item.primary}主联系人{else /}普通联系人{/if}</span></div></td>
+        <td>{$item.relation}</td>
+        <td>{$item.phone}</td>
+        <td>{$item.wechat}</td>
+        <td><span class="badge badge-soft">{$item.concernLevel}</span></td>
+        <td>{$item.lastContact}</td>
+        <td>{$item.remark}</td>
+    </tr>
+    {/volist}
+    </tbody></table></div>
+</section>
+{/block}

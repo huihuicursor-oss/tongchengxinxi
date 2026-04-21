@@ -1,0 +1,27 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="billingStats" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<section class="card table-card">
+    <div class="section-head"><h2>费用结算台账</h2><span>护理费 / 助餐费 / 长护险差额</span></div>
+    <div class="table-wrapper"><table><thead><tr><th>老人</th><th>账期</th><th>费用项目</th><th>金额</th><th>支付状态</th><th>支付方式</th><th>到期时间</th><th>经办人</th><th>备注</th></tr></thead><tbody>
+    {volist name="records" id="item"}
+    <tr>
+        <td><a href="{$appBase}/elders/{$item.elderId}"><strong>{$item.elder}</strong></a></td>
+        <td>{$item.month}</td>
+        <td>{$item.item}</td>
+        <td>{$item.amount}</td>
+        <td><span class="badge {$item.statusClass}">{$item.status}</span></td>
+        <td>{$item.payMethod}</td>
+        <td>{$item.dueDate}</td>
+        <td>{$item.operator}</td>
+        <td>{$item.remark}</td>
+    </tr>
+    {/volist}
+    </tbody></table></div>
+</section>
+{/block}

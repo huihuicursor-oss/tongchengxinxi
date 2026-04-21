@@ -1,0 +1,26 @@
+{extend name="layout/base" /}
+
+{block name="content"}
+<div class="stats-row">
+    {volist name="taskStats" id="item" key="idx"}
+    <div class="stat-tile summary-{if $idx==1}blue{elseif $idx==2}cyan{elseif $idx==3}orange{else /}green{/if}"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
+<section class="card table-card">
+    <div class="section-head"><h2>护理执行看板</h2><span>楼栋 / 床位 / 任务 / 执行状态</span></div>
+    <div class="table-wrapper"><table><thead><tr><th>老人</th><th>任务类型</th><th>楼栋床位</th><th>计划时间</th><th>执行人</th><th>优先级</th><th>状态</th><th>说明</th></tr></thead><tbody>
+    {volist name="tasks" id="item"}
+    <tr>
+        <td><div class="table-title"><strong><a href="{$appBase}/elders/{$item.elderId}">{$item.elder}</a></strong><span>可追溯到老人档案</span></div></td>
+        <td>{$item.taskType}</td>
+        <td>{$item.ward} / {$item.bedNo}</td>
+        <td>{$item.scheduleTime}</td>
+        <td>{$item.executor}</td>
+        <td><span class="badge {$item.priorityClass}">{$item.priority}</span></td>
+        <td><span class="badge {$item.statusClass}">{$item.status}</span></td>
+        <td>{$item.notes}</td>
+    </tr>
+    {/volist}
+    </tbody></table></div>
+</section>
+{/block}

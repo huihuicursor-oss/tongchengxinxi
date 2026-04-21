@@ -3,47 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>后台登录 - 智慧养老服务管理平台</title>
+    <title>后台登录 - 智慧养老综合管理平台</title>
     <link rel="stylesheet" href="{$appBase}/static/app.css">
 </head>
 <body class="login-body">
 <div class="login-shell">
     <section class="login-hero">
-        <span class="badge badge-soft">养老系统后台</span>
-        <h1>智慧养老服务管理平台</h1>
-        <p>接入 MySQL 数据库、后台登录权限、老人详情与新增/编辑表单，便于后续继续还原你的原型页面和交互流程。</p>
-        <ul class="bullet-list login-features">
-            <li>老人档案、服务工单、健康监测真实数据化</li>
-            <li>登录角色区分：超级管理员 / 运营人员 / 只读账号</li>
-            <li>支持新增和编辑老人档案</li>
+        <span class="badge badge-soft">智慧养老后台</span>
+        <h1>养老机构、社区居家与护理执行一体化管理系统</h1>
+        <p>根据墨刀养老服务平台与护理端原型思路，重构为完整后台：覆盖老人档案、护理执行、服务工单、慢病健康、用药提醒、家属联络、活动中心、费用结算。</p>
+        <ul class="tip-list">
+            <li>老人全生命周期档案管理</li>
+            <li>楼栋/床位/护理任务执行闭环</li>
+            <li>慢病监测、用药计划与家属同步</li>
+            <li>养老服务、活动、账单统一运营</li>
         </ul>
     </section>
     <section class="card login-card">
-        <div class="section-head compact">
-            <h2>后台登录</h2>
-            <span>请使用演示账号登录</span>
+        <div class="section-head">
+            <h2>系统登录</h2>
+            <span>请输入账号密码进入管理后台</span>
         </div>
         {if $error}
         <div class="alert alert-error">{$error}</div>
         {/if}
-        <form method="post" action="{$appBase}/login" class="form-grid single-column">
-            <label class="form-field">
+        <form method="post" action="{$appBase}/login" class="form-grid">
+            <label class="form-field full">
                 <span>账号</span>
                 <input type="text" name="username" value="{$lastUsername}" placeholder="请输入账号">
             </label>
-            <label class="form-field">
+            <label class="form-field full">
                 <span>密码</span>
                 <input type="password" name="password" placeholder="请输入密码">
             </label>
-            <button type="submit" class="button button-primary button-block">登录后台</button>
+            <div class="form-actions full">
+                <button type="submit" class="button button-primary">登录后台</button>
+            </div>
         </form>
-        <div class="demo-accounts">
-            <h3>演示账号</h3>
-            <ul>
-                <li>admin / Admin@123456（超级管理员）</li>
-                <li>operator / Operator@123456（运营人员）</li>
-                <li>viewer / Viewer@123456（只读账号）</li>
-            </ul>
+        <div class="card subtle">
+            <div class="section-head"><h3>演示账号</h3><span>默认密码</span></div>
+            <div class="module-list">
+                <li>admin / Admin@123456</li>
+                <li>operator / Operator@123456</li>
+                <li>viewer / Viewer@123456</li>
+            </div>
         </div>
     </section>
 </div>

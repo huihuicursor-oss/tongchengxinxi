@@ -16,10 +16,14 @@ Route::group(function () {
     Route::get('elders/:id/edit', 'elderlyCare/edit')->pattern(['id' => '\d+']);
     Route::post('elders/:id/edit', 'elderlyCare/update')->pattern(['id' => '\d+']);
     Route::get('elders/:id', 'elderlyCare/show')->pattern(['id' => '\d+']);
+    Route::get('care-tasks', 'elderlyCare/careTasks');
     Route::get('services', 'elderlyCare/services');
     Route::get('health', 'elderlyCare/health');
+    Route::get('medications', 'elderlyCare/medications');
+    Route::get('families', 'elderlyCare/families');
     Route::get('staff', 'elderlyCare/staff');
     Route::get('activities', 'elderlyCare/activities');
+    Route::get('billing', 'elderlyCare/billing');
 })->middleware(AuthMiddleware::class);
 
 Route::get('hello/:name', 'index/hello');

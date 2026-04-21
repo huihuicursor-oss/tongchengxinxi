@@ -1,31 +1,30 @@
 {extend name="layout/base" /}
 
 {block name="content"}
+<div class="stats-row">
+    {volist name="activityStats" id="item"}
+    <div class="stat-tile"><span>{$item.label}</span><strong>{$item.value}</strong></div>
+    {/volist}
+</div>
 <div class="grid cols-2">
     {volist name="activities" id="item"}
-    <section class="card activity-card">
-        <div class="activity-date">{$item.date}</div>
-        <h2>{$item.title}</h2>
-        <p>地点：{$item.location}</p>
-        <p>参与情况：{$item.participants}</p>
-        <p>负责部门：{$item.owner}</p>
-        <p>{$item.description}</p>
-        <div class="activity-footer">
-            <span class="badge badge-soft">{$item.status}</span>
-            <span>可继续扩展报名、签到、照片回传</span>
+    <section class="card">
+        <div class="section-head"><h2>{$item.title}</h2><span class="badge badge-soft">{$item.status}</span></div>
+        <div class="info-list">
+            <div class="info-item"><strong>时间</strong><span>{$item.date}</span></div>
+            <div class="info-item"><strong>地点</strong><span>{$item.location}</span></div>
+            <div class="info-item"><strong>参与情况</strong><span>{$item.participants}</span></div>
+            <div class="info-item"><strong>负责部门</strong><span>{$item.owner}</span></div>
+            <div class="info-item"><strong>活动说明</strong><span>{$item.description}</span></div>
         </div>
     </section>
     {/volist}
-
-    <section class="card info-panel">
-        <div class="section-head">
-            <h2>活动运营说明</h2>
-            <span>数据来自 activities 表</span>
-        </div>
-        <ul class="bullet-list">
-            <li>可继续细分健康宣教、节庆活动、兴趣课程和义诊。</li>
-            <li>可对接短信、微信通知，提醒老人和家属参与活动。</li>
-            <li>后续可增加活动详情页、签到二维码、满意度回访。</li>
+    <section class="card subtle">
+        <div class="section-head"><h2>活动运营建议</h2><span>贴合养老服务原型</span></div>
+        <ul class="tip-list">
+            <li>增加报名二维码、签到记录、照片回传和满意度调查。</li>
+            <li>支持健康宣教、生日会、兴趣课程、节庆活动等分类。</li>
+            <li>后续可扩展到长者端查看活动详情与报名入口。</li>
         </ul>
     </section>
 </div>
