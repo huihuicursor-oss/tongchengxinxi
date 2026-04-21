@@ -3,9 +3,9 @@
 {block name="content"}
 <div class="toolbar card-inline">
     <div class="toolbar-actions">
-        <a class="button button-light" href="/elders">返回列表</a>
+        <a class="button button-light" href="{$appBase}/elders">返回列表</a>
         {if $elder.id}
-        <a class="button button-light" href="/elders/{$elder.id}">查看详情</a>
+        <a class="button button-light" href="{$appBase}/elders/{$elder.id}">查看详情</a>
         {/if}
     </div>
     <span class="badge badge-soft">管理员 / 运营可编辑</span>
@@ -95,7 +95,7 @@
         </label>
         <div class="form-actions span-2">
             <button type="submit" class="button button-primary">{$submitLabel}</button>
-            <a href="/elders" class="button button-light">取消</a>
+            <a href="{$appBase}/elders" class="button button-light">取消</a>
         </div>
     </form>
 </section>

@@ -12,12 +12,13 @@ class Auth extends BaseController
     public function loginForm()
     {
         if (isset($_SESSION['admin_user'])) {
-            return redirect('/dashboard');
+            return redirect(app_url_path('dashboard'));
         }
 
         View::assign([
             'error' => '',
             'lastUsername' => '',
+            'appBase' => app_base_url(),
         ]);
 
         return View::fetch('auth/login');
@@ -43,6 +44,7 @@ class Auth extends BaseController
             View::assign([
                 'error' => '用户名或密码错误',
                 'lastUsername' => $data['username'],
+                'appBase' => app_base_url(),
             ]);
 
             return View::fetch('auth/login');
@@ -58,13 +60,13 @@ class Auth extends BaseController
         $_SESSION['admin_user'] = $sessionUser;
         $user->save(['last_login_at' => date('Y-m-d H:i:s')]);
 
-        return redirect('/dashboard');
+        return redirect(app_url_path('dashboard'));
     }
 
     public function logout()
     {
         unset($_SESSION['admin_user']);
 
-        return redirect('/login');
+        return redirect(app_url_path('login'));
     }
 }

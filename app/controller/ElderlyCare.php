@@ -46,7 +46,7 @@ class ElderlyCare extends AdminBaseController
     {
         $this->authorizeRoles(['super_admin', 'operator']);
 
-        return $this->renderPage('elder/form', '新增老人档案', $this->buildFormViewData('/elders/create', '新建档案'));
+        return $this->renderPage('elder/form', '新增老人档案', $this->buildFormViewData(app_url_path('elders/create'), '新建档案'));
     }
 
     public function store()
@@ -56,7 +56,7 @@ class ElderlyCare extends AdminBaseController
         $this->validateElderPayload($payload);
         $elder = $this->service->saveElder($payload);
 
-        return redirect('/elders/' . $elder->id);
+        return redirect(app_url_path('elders/' . $elder->id));
     }
 
     public function edit(int $id)
@@ -67,7 +67,7 @@ class ElderlyCare extends AdminBaseController
             abort(404, '老人档案不存在');
         }
 
-        return $this->renderPage('elder/form', '编辑老人档案', $this->buildFormViewData('/elders/' . $id . '/edit', '保存修改', $elder));
+        return $this->renderPage('elder/form', '编辑老人档案', $this->buildFormViewData(app_url_path('elders/' . $id . '/edit'), '保存修改', $elder));
     }
 
     public function update(int $id)
@@ -82,7 +82,7 @@ class ElderlyCare extends AdminBaseController
         $this->validateElderPayload($payload);
         $this->service->saveElder($payload, $elder);
 
-        return redirect('/elders/' . $elder->id);
+        return redirect(app_url_path('elders/' . $elder->id));
     }
 
     public function services()
@@ -121,18 +121,19 @@ class ElderlyCare extends AdminBaseController
         }
 
         $navigation = [
-            ['key' => 'dashboard', 'label' => '运营概览', 'url' => '/dashboard', 'activeClass' => $activeNav === 'dashboard' ? 'active' : ''],
-            ['key' => 'elders', 'label' => '老人档案', 'url' => '/elders', 'activeClass' => $activeNav === 'elders' ? 'active' : ''],
-            ['key' => 'services', 'label' => '服务工单', 'url' => '/services', 'activeClass' => $activeNav === 'services' ? 'active' : ''],
-            ['key' => 'health', 'label' => '健康监测', 'url' => '/health', 'activeClass' => $activeNav === 'health' ? 'active' : ''],
-            ['key' => 'staff', 'label' => '护理排班', 'url' => '/staff', 'activeClass' => $activeNav === 'staff' ? 'active' : ''],
-            ['key' => 'activities', 'label' => '活动通知', 'url' => '/activities', 'activeClass' => $activeNav === 'activities' ? 'active' : ''],
+            ['key' => 'dashboard', 'label' => '运营概览', 'url' => app_url_path('dashboard'), 'activeClass' => $activeNav === 'dashboard' ? 'active' : ''],
+            ['key' => 'elders', 'label' => '老人档案', 'url' => app_url_path('elders'), 'activeClass' => $activeNav === 'elders' ? 'active' : ''],
+            ['key' => 'services', 'label' => '服务工单', 'url' => app_url_path('services'), 'activeClass' => $activeNav === 'services' ? 'active' : ''],
+            ['key' => 'health', 'label' => '健康监测', 'url' => app_url_path('health'), 'activeClass' => $activeNav === 'health' ? 'active' : ''],
+            ['key' => 'staff', 'label' => '护理排班', 'url' => app_url_path('staff'), 'activeClass' => $activeNav === 'staff' ? 'active' : ''],
+            ['key' => 'activities', 'label' => '活动通知', 'url' => app_url_path('activities'), 'activeClass' => $activeNav === 'activities' ? 'active' : ''],
         ];
 
         View::assign(array_merge([
             'systemTitle' => '智慧养老服务管理平台',
             'pageTitle' => $pageTitle,
             'navigation' => $navigation,
+            'appBase' => app_base_url(),
         ], $data));
 
         return View::fetch($template);

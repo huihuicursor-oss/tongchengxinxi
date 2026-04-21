@@ -10,10 +10,10 @@ class Index extends BaseController
     public function index()
     {
         if (isset($_SESSION['admin_user'])) {
-            return redirect('/dashboard');
+            return redirect(app_url_path('dashboard'));
         }
 
-        return redirect('/login');
+        return redirect(app_url_path('login'));
     }
 
     public function hello(string $name = 'ThinkPHP8')

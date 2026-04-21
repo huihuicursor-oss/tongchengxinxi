@@ -3,9 +3,9 @@
 {block name="content"}
 <div class="toolbar card-inline">
     <div class="toolbar-actions">
-        <a class="button button-light" href="/elders">返回列表</a>
+        <a class="button button-light" href="{$appBase}/elders">返回列表</a>
         {if $canManageElders}
-        <a class="button button-primary" href="/elders/{$elder.id}/edit">编辑档案</a>
+        <a class="button button-primary" href="{$appBase}/elders/{$elder.id}/edit">编辑档案</a>
         {/if}
     </div>
     <span class="badge {$elder.statusClass}">{$elder.status}</span>

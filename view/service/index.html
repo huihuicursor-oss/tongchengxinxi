@@ -25,7 +25,7 @@
                 <td>{$order.code}</td>
                 <td>
                     {if $order.elderId}
-                    <a href="/elders/{$order.elderId}"><strong>{$order.name}</strong></a>
+                    <a href="{$appBase}/elders/{$order.elderId}"><strong>{$order.name}</strong></a>
                     {else /}
                     <strong>{$order.name}</strong>
                     {/if}

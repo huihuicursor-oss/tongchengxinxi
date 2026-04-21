@@ -14,7 +14,7 @@ class AuthMiddleware
         }
 
         if (!isset($_SESSION['admin_user'])) {
-            return redirect('/login');
+            return redirect(app_url_path('login'));
         }
 
         return $next($request);

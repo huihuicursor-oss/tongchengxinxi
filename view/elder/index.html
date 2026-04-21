@@ -2,13 +2,13 @@
 
 {block name="content"}
 <div class="toolbar card-inline">
-    <form class="toolbar-search" method="get" action="/elders">
+    <form class="toolbar-search" method="get" action="{$appBase}/elders">
         <input type="text" name="keyword" value="{$keyword}" placeholder="搜索老人姓名、房间、联系人或标签">
         <button type="submit" class="button button-primary">查询</button>
     </form>
     <div class="toolbar-actions">
         {if $canManageElders}
-        <a class="button button-primary" href="/elders/create">新增老人档案</a>
+        <a class="button button-primary" href="{$appBase}/elders/create">新增老人档案</a>
         {else /}
         <span class="badge badge-soft">当前账号为只读，无法新增或编辑</span>
         {/if}
@@ -59,9 +59,9 @@
                 <td>{$elder.lastService}</td>
                 <td>
                     <div class="table-actions">
-                        <a href="/elders/{$elder.id}">查看</a>
+                        <a href="{$appBase}/elders/{$elder.id}">查看</a>
                         {if $canManageElders}
-                        <a href="/elders/{$elder.id}/edit">编辑</a>
+                        <a href="{$appBase}/elders/{$elder.id}/edit">编辑</a>
                         {/if}
                     </div>
                 </td>
