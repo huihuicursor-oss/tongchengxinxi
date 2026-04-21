@@ -9,8 +9,8 @@ class Service extends BaseController
         return $this->renderPage('service', [
             'pageTitle' => '服务调度',
             'pageDescription' => '护理排班、送餐服务、康复训练等任务统一调度。',
-            'serviceSummary' => $this->repo->serviceSummary(),
-            'serviceSchedules' => $this->repo->serviceSchedules(),
+            'serviceSummary' => $this->repo->getServiceSummary(),
+            'serviceSchedules' => $this->repo->getServiceSchedules(),
         ]);
     }
 }
